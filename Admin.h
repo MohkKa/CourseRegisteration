@@ -12,10 +12,10 @@ class Admin {
 
 
     string id;
-    string name;
+         string name;
     string username;
     string password;
-    stack <string> addedcourses;
+    stack<string> addedcourses;
 
     Admin();
     Admin(string id , string name , string username , string password  );

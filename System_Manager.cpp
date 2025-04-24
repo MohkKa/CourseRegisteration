@@ -3,6 +3,7 @@
 //
 
 #include "System_Manager.h"
+#include <fstream>
 
 void System_Manager::editAdminPass(string username, string password) {
 
@@ -15,8 +16,9 @@ void System_Manager::editAdminPass(string username, string password) {
             string oldPassword;
             cout << "Enter your old password:" << endl;
             cin >> oldPassword;
-            if (admins[username] == oldPassword) {
-                admins[username] = password;
+
+            if (admins[username].getPassword() == oldPassword) {
+                admins[username].setPassword(password);
                 cout << "Password successfully changed." << endl;
                 return;
             } else {
@@ -39,8 +41,8 @@ void System_Manager::editStudentPass(string id, string password) {
             string oldPassword;
             cout << "Enter your old password:" << endl;
             cin >> oldPassword;
-            if (students[id] == oldPassword;) {
-                students[id] = password;
+            if (students[id].getPassword() == oldPassword) {
+                students[id].setPassword(password);
                 cout << "Password successfully changed." << endl;
                 return;
             } else {
@@ -67,12 +69,11 @@ Course System_Manager::getCourse(string courseID) {
 void System_Manager::showAvailableCourses() {
     cout << "Available courses:" << endl;
     for(auto course : courses) {
-        cout << "Course ID: " << course.getCourseID() << endl;
-        cout << "Title: " << course.getTitle() << endl;
-        cout << "Credit Hours: " << course.getCreditHour() << endl;
-        cout << "Instructor: " << course.getInstructorName() << endl;
-        cout << "Syllabus: " << course.getSyllabus() << endl;
-
+        cout << "Course ID: " << course.second.getCourseID() << endl;
+        cout << "Title: " << course.second.getTitle() << endl;
+        cout << "Credit Hours: " << course.second.getCreditHour() << endl;
+        cout << "Instructor: " << course.second.getInstructorName() << endl;
+        cout << "Syllabus: " << course.second.getSyllabus() << endl;
     }
 }
 
@@ -90,7 +91,8 @@ void System_Manager::showEligibleCourses(string id) {
                 bool found = false;
 
                 string CourseID = prereq.getCourseID();
-                    if (student.completedCourses.find(CourseID) != student.completedCourses.end()) {
+                    if (student.FindCompletedCourse(id)) {
+
                         found = true;
                     }
 
@@ -121,7 +123,7 @@ void System_Manager::showEligibleCourses(string id) {
 }
 
 bool isStudentEligible(string id, string courseCode) {
-    if (students.find(id) == students.end() || courses.find(courseCode) == courses.end()) {
+    if (students == students.end() || courses.find(courseCode) == courses.end()) {
         return false;
     }
 
@@ -141,8 +143,7 @@ bool isStudentEligible(string id, string courseCode) {
 
 //--------------------------------------------- FILES FUNCTIONS---------------------------------------------
 
-//Students Functions
-
+/*
 void System_Manager::readStudentsFromFile() {
     std::ifstream file("students.csv");
     if (!file.is_open()) {
@@ -197,7 +198,6 @@ void System_Manager::readStudentsFromFile() {
     file.close();
 }
 
-
 void System_Manager::writeStudentsToFile() {
     std::ofstream file("students.csv");
     if (!file.is_open()) {
@@ -233,10 +233,6 @@ void System_Manager::writeStudentsToFile() {
 
     file.close();
 }
-
-
-
-//Admins Functions
 
 void System_Manager::readAdminsFromFile() {
     std::ifstream file("admins.csv");
@@ -281,12 +277,6 @@ void System_Manager::writeAdminsToFile() {
     file.close();
 }
 
-
-
-
-
-//Courses Function
-
 void System_Manager::readCoursesFromFile() {
     std::ifstream file("courses.csv");
     if (!file.is_open()) {
@@ -324,7 +314,6 @@ void System_Manager::readCoursesFromFile() {
     file.close();
 }
 
-
 void System_Manager::writeCoursesToFile() {
     std::ofstream file("courses.csv");
     if (!file.is_open()) {
@@ -351,3 +340,5 @@ void System_Manager::writeCoursesToFile() {
 
     file.close();
 }
+
+*/
