@@ -1,0 +1,3 @@
+C:/Users/mohamed/OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)/Desktop/Project/cmake-build-debug/CMakeFiles/Project.dir
+C:/Users/mohamed/OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)/Desktop/Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mohamed/OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)/Desktop/Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
