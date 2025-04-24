@@ -23,38 +23,53 @@ class System_Manager {
     string password;
 
     unordered_map<string, Student> students;
-    unordered_map<string, Course> courses;  //remove ?
     unordered_map<string, Admin> admins;
 
 public:
+    unordered_map<string, Course> courses; //remove ?
+
+    /*
+
+for() ->
+
+     */
+
+
     System_Manager();
 
+    void addCourse(Course course, string id);
 
     void editAdminPass(string username, string password);
+
     void editStudentPass(string username, string password);
+
     void showAvailableCourses();
+
     void showEligibleCourses(string id);
+
     bool isStudentEligible(string id, string courseCode);
+
     Student getStudent(string id);
+
     Admin getAdmin(string username);
+
     Course getCourse(string courseID);
 
 
     //--------------------------------------------- FILES FUNCTIONS---------------------------------------------
 
     void readStudentsFromFile();
+
     void writeStudentsToFile();
 
     void readAdminsFromFile();
+
     void writeAdminsToFile();
 
     void readCoursesFromFile();
+
     void writeCoursesToFile();
-
-
-
 };
-
 
 
 #endif //SYSTEM_MANAGER_H

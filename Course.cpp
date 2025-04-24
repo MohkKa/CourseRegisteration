@@ -12,6 +12,7 @@ std::string Course::getCourseID() const {
     return courseID;
 }
 
+
 CourseDescription Course::getDescription() const {
     return courseDescription;
 }

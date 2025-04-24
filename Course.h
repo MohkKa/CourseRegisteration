@@ -49,6 +49,8 @@ public:
 
     void showCourseDescription() const;
     void showPrerequisites() const;
+
+    void addCourse(Course course);
 };
 
 #endif // COURSE_H

@@ -6,7 +6,6 @@
 #include <fstream>
 
 void System_Manager::editAdminPass(string username, string password) {
-
     int i = 3;
     while (i--) {
         if (admins.find(username) == admins.end()) {
@@ -29,7 +28,6 @@ void System_Manager::editAdminPass(string username, string password) {
 
     cout << "Too many tries, try again later." << endl;
 }
-
 
 void System_Manager::editStudentPass(string id, string password) {
     int i = 3;
@@ -68,7 +66,7 @@ Course System_Manager::getCourse(string courseID) {
 
 void System_Manager::showAvailableCourses() {
     cout << "Available courses:" << endl;
-    for(auto course : courses) {
+    for (auto course: courses) {
         cout << "Course ID: " << course.second.getCourseID() << endl;
         cout << "Title: " << course.second.getTitle() << endl;
         cout << "Credit Hours: " << course.second.getCreditHour() << endl;
@@ -77,6 +75,10 @@ void System_Manager::showAvailableCourses() {
     }
 }
 
+/*
+
+ */
+
 void System_Manager::showEligibleCourses(string id) {
     if (students.find(id) == students.end()) {
         cout << "Invalid entry." << endl;
@@ -84,17 +86,16 @@ void System_Manager::showEligibleCourses(string id) {
         Student student = students[id];
         stack<Course> eligibleCourses;
 
-        for (const auto& [courseID, course] : courses) {
+        for (const auto &[courseID, course]: courses) {
             bool eligible = true;
 
-            for (auto prereq : course.getPrerequisites()) {
+            for (auto prereq: course.getPrerequisites()) {
                 bool found = false;
 
                 string CourseID = prereq.getCourseID();
-                    if (student.FindCompletedCourse(id)) {
-
-                        found = true;
-                    }
+                if (student.FindCompletedCourse(id)) {
+                    found = true;
+                }
 
                 if (!found) {
                     eligible = false;
@@ -118,21 +119,20 @@ void System_Manager::showEligibleCourses(string id) {
             eligibleCourses.top().showCourseDescription();
             eligibleCourses.pop();
         }
-
     }
 }
 
-bool isStudentEligible(string id, string courseCode) {
-    if (students == students.end() || courses.find(courseCode) == courses.end()) {
+bool System_Manager::isStudentEligible(string id, string courseCode) {
+    if (students.find(id) == students.end() || courses.find(courseCode) == courses.end()) {
         return false;
     }
 
     Student student = students[id];
     Course course = courses[courseCode];
 
-    for (const Course& prereq : course.getPrerequisites()) {
+    for (const Course &prereq: course.getPrerequisites()) {
         string prereqID = prereq.getCourseID();
-        if (student.completedCourses.find(prereqID) == student.completedCourses.end()) {
+        if (!student.FindCompletedCourse(prereqID)) {
             return false;
         }
     }
@@ -140,6 +140,10 @@ bool isStudentEligible(string id, string courseCode) {
     return true;
 }
 
+
+void System_Manager::addCourse(Course course, string id) {
+    courses.insert(make_pair(id, course));
+}
 
 //--------------------------------------------- FILES FUNCTIONS---------------------------------------------
 
