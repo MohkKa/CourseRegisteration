@@ -1,66 +1,52 @@
 #ifndef ADMIN_H
 #define ADMIN_H
 
-#include <iostream>
 #include <stack>
-#include "System_Manager.h"
+#include <string>
+
+class System_Manager;
 
 using namespace std;
-
 
 class Admin {
     string id;
     string name;
     string username;
     string password;
-    stack<string> addedcourses;
+    stack<string> addedCourses;
 
 public:
     Admin();
 
-    Admin(string id, string name, string username, string password);
+    Admin(const string &id, const string &name, const string &username, const string &password);
 
-
-    // managing courses
-    // can upload(add) or update
     void addCourse(System_Manager &manager);
 
     void updateCourse(System_Manager &manager);
 
     void removeCourse(System_Manager &manager);
 
-    bool UniqueID(string, char);
+    bool UniqueID(const string &ID, char type, const System_Manager &);
 
-    // extra features
-    void undoLastaddedcourse(System_Manager &manager);
+    void undoLastAddedCourse(System_Manager &manager);
 
     void displayCoursesByCreditHours(System_Manager &manager);
 
+    void addPrereq(System_Manager &manager);
 
-    // managing prerequistes
-    // add new prerequisite for a course
-    void addPrereq();
+    void removePrereq(System_Manager &manager);
 
-    void removePrereq();
+    void addgrade(System_Manager &manager);
 
+    void updategrade(System_Manager &manager);
 
-    // managing grades
-    // can upload(add) or update
-    void addgrade();
+    void addStudent(System_Manager &manager);
 
-    void updategrade();
+    void setPassword(const string &password);
 
+    string getUsername();
 
-    // add new student
-    void addStudent();
-
-    string getPassword() {
-        return password;
-    }
-
-    void setPassword(string newPassword) {
-        password = newPassword;
-    }
+    string getPassword();
 };
 
 

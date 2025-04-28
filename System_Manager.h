@@ -1,62 +1,49 @@
-//
-// Created by msi on 20/04/2025.
-//
-
 #ifndef SYSTEM_MANAGER_H
 #define SYSTEM_MANAGER_H
-#include "Student.h"
-#include "Course.h"
-#include"Admin.h"
-#include <iostream>
-#include <vector>
-#include <stack>
-//#include <pair>
-#include <utility>
+
 #include <unordered_map>
-#include <map>
 #include <string>
-#include <set>
+#include "Admin.h"
+#include "Student.h"
+
 using namespace std;
 
 class System_Manager {
-    string username;
-    string password;
-
-    unordered_map<string, Student> students;
-    unordered_map<string, Admin> admins;
+    std::string username;
+    std::string password;
 
 public:
-    unordered_map<string, Course> courses; //remove ?
-
-    /*
-
-for() ->
-
-     */
-
+    std::unordered_map<std::string, Student> students;
+    std::unordered_map<std::string, Admin> admins;
+    std::unordered_map<std::string, Course> courses;
 
     System_Manager();
 
-    void addCourse(Course course, string id);
+    void addCourse(const string &courseCode, const Course &course);
 
-    void editAdminPass(string username, string password);
+    void removeCourse(const string &courseCode);
 
-    void editStudentPass(string username, string password);
+    void editAdminPass(const string &username, const string &password);
 
-    void showAvailableCourses();
+    void editStudentPass(const string &id, const string &password);
 
-    void showEligibleCourses(string id);
+    void showAvailableCourses() const;
 
-    bool isStudentEligible(string id, string courseCode);
+    void showEligibleCourses(const string &id);
 
-    Student getStudent(string id);
+    bool isStudentEligible(const string &id, const string &courseCode);
 
-    Admin getAdmin(string username);
+    void updateCourse(const string &courseID, const Course &updatedCourse);
 
-    Course getCourse(string courseID);
+    void addStudent(const string &studentID, const Student &student);
 
+    void removeStudent(const string &studentID);
 
-    //--------------------------------------------- FILES FUNCTIONS---------------------------------------------
+    Student getStudent(const string &id);
+
+    Admin getAdmin(const string &username);
+
+    Course getCourse(const string &courseID);
 
     void readStudentsFromFile();
 
@@ -69,7 +56,16 @@ for() ->
     void readCoursesFromFile();
 
     void writeCoursesToFile();
-};
 
+    /*
+
+    void setAdmins(const unordered_map<string, Admin> &newAdmins);
+    void addAdmin(const string &username, const Admin &admin);
+    void removeAdmin(const string &username);
+    void setCourses(const unordered_map<string, Course> &newCourses);
+    void setStudents(const unordered_map<string, Student> &newStudents);
+
+    */
+};
 
 #endif //SYSTEM_MANAGER_H

@@ -3,7 +3,9 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
+#include <iomanip>
+
+class System_Manager;
 
 struct Instructor {
     std::string name;
@@ -24,30 +26,49 @@ class Course {
 
 public:
     Course();
-    Course(const std::string& id, const CourseDescription& desc);
+
+    Course(std::string id, CourseDescription desc);
 
     std::string getCourseID() const;
-    CourseDescription getDescription() const;
-    std::string getTitle() const;
-    std::string getSyllabus() const;
-    int getCreditHour() const;
-    Instructor getInstructor() const;
-    std::string getInstructorName() const;
-    std::string getInstructorEmail() const;
-    const std::vector<Course>& getPrerequisites() const;
 
-    void setCourseID(const std::string& id);
-    void setDescription(const CourseDescription& desc);
-    void setTitle(const std::string& t);
-    void setSyllabus(const std::string& s);
+    CourseDescription getDescription() const;
+
+    std::string getTitle() const;
+
+    std::string getSyllabus() const;
+
+    int getCreditHour() const;
+
+    Instructor getInstructor() const;
+
+    std::string getInstructorName() const;
+
+    std::string getInstructorEmail() const;
+
+    const std::vector<Course> &getPrerequisites() const;
+
+    void setCourseID(const std::string &id);
+
+    void setDescription(const CourseDescription &desc);
+
+    void setTitle(const std::string &t);
+
+    void setSyllabus(const std::string &s);
+
     void setCreditHour(int ch);
-    void setInstructor(const Instructor& inst);
-    void setInstructorName(const std::string& name);
-    void setInstructorEmail(const std::string& email);
-    void addPrerequisite(const Course& course);
+
+    void setInstructor(const Instructor &inst);
+
+    void setInstructorName(const std::string &name);
+
+    void setInstructorEmail(const std::string &email);
+
+    void addPrerequisite(const Course &course, const System_Manager &manager);
+
     void clearPrerequisites();
 
     void showCourseDescription() const;
+
     void showPrerequisites() const;
 
     void addCourse(Course course);

@@ -1,10 +1,8 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <string>
-#include <vector>
-#include <deque>
 #include "Course.h"
+#include <deque>
 
 struct CompletedCourse {
     Course course;
@@ -19,21 +17,16 @@ class Student {
     std::string password;
 
     std::vector<CompletedCourse> completedCourses;
-    std::vector<Course> registeredCourses;
     std::vector<Course> availableCourses;
 
 public:
+    std::vector<Course> registeredCourses;
     std::string id;
 
-    /*
+    Student() = default;
 
-
-
-     */
-
-
-    Student(std::string name, std::string id,
-            std::string year, std::string email);
+    Student(const std::string &name, const std::string &id,
+            const std::string &year, const std::string &email);
 
     void viewGrade() const;
 
@@ -45,7 +38,7 @@ public:
 
     bool checkPrerequisite(const Course &course) const;
 
-    void leftPrerequisites(std::deque<Course> leftCourses) const;
+    static void leftPrerequisites(std::deque<Course> leftCourses);
 
     void registerCourse();
 
@@ -62,15 +55,13 @@ public:
 
     void generateTranscript() const;
 
-
-    const std::vector<Course> &getRegisteredCourses() const { return registeredCourses; }
-    const std::vector<Course> &getAvailableCourses() const { return availableCourses; }
-    const std::vector<CompletedCourse> &getCompletedCourses() const { return completedCourses; }
-
+    std::vector<Course> getRegisteredCourses() const { return registeredCourses; }
+    std::vector<Course> getAvailableCourses() const { return availableCourses; }
+    std::vector<CompletedCourse> getCompletedCourses() const { return completedCourses; }
     std::string getPassword() const { return password; }
     void setPassword(const std::string &newPassword) { password = newPassword; }
 
-    bool FindCompletedCourse(std::string id);
+    bool FindCompletedCourse(const std::string &id) const;
 };
 
 #endif // STUDENT_H

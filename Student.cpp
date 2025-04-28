@@ -1,14 +1,13 @@
 #include "Student.h"
-#include <iomanip>
-#include <iostream>
 #include <algorithm>
-#include <limits>
-#include <stdexcept>
-#include <utility>
+#include <iostream>
 
-Student::Student(std::string name, std::string id,
-                 std::string year, std::string email)
-    : name(std::move(name)), id(std::move(id)), year(std::move(year)), email(std::move(email)) {
+Student::Student(const std::string &name, const std::string &id,
+                 const std::string &year, const std::string &email) {
+    this->name = name;
+    this->id = id;
+    this->year = year;
+    this->email = email;
 }
 
 void Student::addCompletedCourse(const CompletedCourse &course) {
@@ -28,14 +27,14 @@ void Student::viewGrade() const {
         return;
     }
 
-    size_t maxCourseNameWidth = 12;
-    size_t maxSemesterWidth = 10;
-    size_t maxGradeWidth = 7;
+    int maxCourseNameWidth = 12;
+    int maxSemesterWidth = 10;
+    int maxGradeWidth = 7;
 
-    for (const auto &completedCourse: completedCourses) {
-        maxCourseNameWidth = std::max(maxCourseNameWidth, completedCourse.course.getTitle().length());
-        maxSemesterWidth = std::max(maxSemesterWidth, completedCourse.semester.length());
-        maxGradeWidth = std::max(maxGradeWidth, completedCourse.grade.length());
+    for (const auto &[course, semester, grade]: completedCourses) {
+        maxCourseNameWidth = std::max(maxCourseNameWidth, static_cast<int>(course.getTitle().length()));
+        maxSemesterWidth = std::max(maxSemesterWidth, static_cast<int>(semester.length()));
+        maxGradeWidth = std::max(maxGradeWidth, static_cast<int>(grade.length()));
     }
 
     std::cout << std::left << std::setw(maxCourseNameWidth) << "Course Name" << " | "
@@ -120,7 +119,7 @@ bool Student::checkPrerequisite(const Course &course) const {
     return true;
 }
 
-void Student::leftPrerequisites(std::deque<Course> leftCourses) const {
+void Student::leftPrerequisites(std::deque<Course> leftCourses) {
     if (leftCourses.empty()) {
         std::cout << "You have no remaining prerequisites.\n";
         return;
@@ -146,7 +145,6 @@ void Student::registerCourse() {
     std::cout << "Please enter the course ID: ";
     std::cin >> courseID;
 
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     bool found = false;
 
@@ -188,12 +186,12 @@ void Student::registerCourse() {
 }
 
 void Student::dropCourse(const std::string &courseID) {
-    auto it = std::find_if(registeredCourses.begin(), registeredCourses.end(), [&](const Course &course) {
+    const auto it = std::ranges::find_if(registeredCourses, [&](const Course &course) {
         return course.getCourseID() == courseID;
     });
 
     if (it != registeredCourses.end()) {
-        std::cout << " Dropped course: " << it->getTitle() << " (ID: " << it->getCourseID() << ")\n";
+        std::cout << " Course dropped: " << it->getTitle() << " (ID: " << it->getCourseID() << ")\n";
         registeredCourses.erase(it);
     } else {
         std::cout << "⚠️ You are not registered in a course with ID: " << courseID << "\n";
@@ -237,8 +235,8 @@ void Student::generateTranscript() const {
     std::cout << "===========================================\n";
 }
 
-bool Student::FindCompletedCourse(std::string id) {
-    for (auto c : completedCourses) {
+bool Student::FindCompletedCourse(const std::string &id) const {
+    for (auto &c: completedCourses) {
         if (c.course.getCourseID() == id) return true;
     }
 

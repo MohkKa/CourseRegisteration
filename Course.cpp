@@ -1,17 +1,18 @@
 #include "Course.h"
-#include <iomanip>
+#include <iostream>
+#include <utility>
+#include "System_Manager.h"
 
 Course::Course() : courseDescription{"", "", 0, {"", ""}} {
 }
 
-Course::Course(const std::string &id, const CourseDescription &desc)
-    : courseID(id), courseDescription(desc) {
+Course::Course(std::string id, CourseDescription desc)
+    : courseID(std::move(id)), courseDescription(std::move(desc)) {
 }
 
 std::string Course::getCourseID() const {
     return courseID;
 }
-
 
 CourseDescription Course::getDescription() const {
     return courseDescription;
@@ -61,7 +62,7 @@ void Course::setSyllabus(const std::string &s) {
     courseDescription.syllabus = s;
 }
 
-void Course::setCreditHour(int ch) {
+void Course::setCreditHour(const int ch) {
     if (ch < 0) {
         throw std::invalid_argument("Credit hours cannot be negative");
     }
@@ -80,12 +81,11 @@ void Course::setInstructorEmail(const std::string &email) {
     courseDescription.instructor.email = email;
 }
 
-void Course::addPrerequisite(const Course &course) {
-    // Prevent circular dependencies
-    if (course.getCourseID() == courseID) {
-        throw std::invalid_argument("A course cannot be a prerequisite for itself");
+void Course::addPrerequisite(const Course &prereq, const System_Manager &manager) {
+    if (!manager.courses.contains(prereq.getCourseID())) {
+        throw std::invalid_argument("Prerequisite course does not exist");
     }
-    prerequisites.push_back(course);
+    prerequisites.push_back(prereq);
 }
 
 void Course::clearPrerequisites() {
