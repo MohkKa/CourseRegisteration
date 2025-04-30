@@ -39,11 +39,13 @@ public:
 
     void removeStudent(const string &studentID);
 
-    Student getStudent(const string &id);
+    Student& getStudent(const std::string &id);  // Return reference
+
+    Course& getCourse(const std::string &courseID);  // Return reference
+
+    void showCompletedCourses(string studentId);
 
     Admin getAdmin(const string &username);
-
-    Course getCourse(const string &courseID);
 
     void readStudentsFromFile();
 

@@ -77,19 +77,20 @@ void Admin::addCourse(System_Manager &manager) {
     cout << "Enter instructor name: ";
     getline(cin, instructorName);
 
+    cin.ignore(); // Clear newline buffer
+
     cout << "Enter instructor email: ";
     getline(cin, instructorEmail);
-
 
     Instructor I = {instructorName, instructorEmail};
     CourseDescription desc = {title, syllabus, creditHour, I};
     Course newCourse(courseID, desc);
-         manager.addCourse(courseID, newCourse);
+    manager.addCourse(courseID, newCourse);
 
     string prereqID;
     cout << "Add prerequisites (course ID, 'done' to finish): ";
     while (cin >> prereqID && prereqID != "done") {
-        if (manager.courses.contains(prereqID)) {
+        if (manager.courses.contains(prereqID) && prereqID != courseID) {
             newCourse.addPrerequisite(manager.courses[prereqID], manager);
             cout << "Prerequisite added: " << prereqID << endl;
         } else {
@@ -97,10 +98,10 @@ void Admin::addCourse(System_Manager &manager) {
         }
     }
 
-    // After adding prerequisites:
-    manager.courses[courseID] = newCourse; // Overwrite the course in the manager
+    manager.courses.insert(make_pair(courseID, newCourse));
     addedCourses.push(courseID);
     cout << "The course was added successfully. " << "\n";
+
 }
 
 void Admin::updateCourse(System_Manager &manager) {
@@ -113,10 +114,10 @@ void Admin::updateCourse(System_Manager &manager) {
         return;
     }
 
-    Course courseToUpdate = manager.getCourse(courseID);
+    Course &courseToUpdate = manager.getCourse(courseID);
 
     cout << "What would you like to update " << "\n";
-    cout << " [1] courseID " << "\n" << "[2] title " << "\n" << "[3] syllabus " << "\n" <<
+    cout << "[1] courseID " << "\n" << "[2] title " << "\n" << "[3] syllabus " << "\n" <<
             "[4] credit hour " << "\n" << "[5] instructor Name " << "\n" << "[6] instructor Email" << "\n";
 
     int choice;
@@ -130,8 +131,6 @@ void Admin::updateCourse(System_Manager &manager) {
             cin >> newID;
             if (UniqueID(newID, 'C', manager)) {
                 courseToUpdate.setCourseID(newID);
-                 manager.addCourse(newID ,courseToUpdate);
-                manager.courses.erase(courseID);
                 cout << "Course ID updated successfully." << "\n";
             } else {
                 cout << "This Course ID is already taken " << "\n";
@@ -178,7 +177,6 @@ void Admin::updateCourse(System_Manager &manager) {
             return;
     }
 
-     manager.updateCourse(courseID, courseToUpdate);
     cout << "The course was updated successfully" << "\n";
 }
 
@@ -214,7 +212,7 @@ void Admin::undoLastAddedCourse(System_Manager &manager) {
         return;
     }
 
-    const string lastCourseID = addedCourses.top();
+    const string &lastCourseID = addedCourses.top();
     addedCourses.pop();
 
     // Check if it still exists before erasing
@@ -246,128 +244,143 @@ void Admin::displayCoursesByCreditHours(System_Manager &manager) {
     }
 }
 
-void Admin::addPrereq(System_Manager& manager) {
+void Admin::addPrereq(System_Manager &manager) {
     string courseID;
-    cout << "Enter course id to add its prerequisites: " << "\n";
+    cout << "Enter course id to add it's prerequisites: " << "\n";
     cin >> courseID;
-    Course up_course = manager.getCourse(courseID);
+    Course &up_course = manager.getCourse(courseID);
 
     if (!up_course.getPrerequisites().empty()) {
         cout << "Current prerequisites:  ";
-        for (Course c : up_course.getPrerequisites()) {
+        for (const Course &c: up_course.getPrerequisites()) {
             cout << c.getTitle() << ", ";
         }
     }
-    else {
-        int x;
-        cout << "Enter number of prerequisite courses required: ";
-        cin >> x;
-        for (int i = 0; i < x; i++) {
-            string id;
-            cout << "Enter course no " << i + 1 << " id:";
-            cin >> id;
-            up_course.addPrerequisite(manager.courses[id], manager);
-        }
+    int x;
+    cout << "Enter number of prerequisite courses required: ";
+    cin >> x;
+    for (int i = 0; i < x; i++) {
+        string id;
+        cout << "Enter course no " << i + 1 << " id:";
+        cin >> id;
+        up_course.addPrerequisite(manager.courses[id], manager);
     }
 
     cout << "Updated prerequisites list: ";
-    for (Course c : up_course.getPrerequisites()) {
+    for (const Course &c: up_course.getPrerequisites()) {
         cout << c.getTitle() << ", ";
     }
 }
 
-void Admin::removePrereq(System_Manager& manager) {
+void Admin::removePrereq(System_Manager &manager) {
     string courseID;
     cout << "Enter course id: " << "\n";
     cin >> courseID;
 
-    Course up_course = manager.getCourse(courseID);
+    Course &up_course = manager.getCourse(courseID);
     vector<Course> prereq_list = up_course.getPrerequisites();
 
 
     if (!prereq_list.empty()) {
         cout << "Current prerequisites:  ";
-        for (Course c : prereq_list) {
+        for (const Course &c: prereq_list) {
             cout << c.getTitle() << ", ";
         }
-    }
-    else {
+    } else {
         cout << "This course doesn't have any prerequisites.";
     }
 
     string courseTitle;
     cout << "Enter course title that you want to remove: ";
     cin >> courseTitle;
-    int index;
 
     for (int i = 0; i < prereq_list.size(); i++) {
         if (prereq_list[i].getTitle() == courseTitle) {
-            index = i;
-            for (int j = index; j < prereq_list.size() - 1; j++) {
-                prereq_list[j] = prereq_list[j + 1];
-            }
+            prereq_list.erase(prereq_list.begin() + i);
             break;
         }
     }
     cout << "Updated prerequisites list: ";
-    for (Course c : up_course.getPrerequisites()) {
+    for (const Course &c: up_course.getPrerequisites()) {
         cout << c.getTitle() << ", ";
     }
-
 }
 
-void Admin::addgrade(System_Manager& manager)
-{
+void Admin::addgrade(System_Manager &manager) {
     string stud_id, course_id;
     string grade, semester;
 
     cout << "Enter student id: ";
     cin >> stud_id;
+    if (!manager.students.contains(stud_id)) {
+        cout << "The student id is incorrect.\n";
+        return;
+    }
+
     cout << "Enter course id: ";
     cin >> course_id;
+
+    if (!manager.courses.contains(course_id)) {
+        cout << "This course id is incorrect.\n";
+        return;
+    }
+
     cout << "Enter course grade: ";
     cin >> grade;
     cout << "Enter course semester: ";
     cin >> semester;
 
-    Student student = manager.getStudent(stud_id);
-    Course course = manager.getCourse(course_id);
+    Student &student = manager.getStudent(stud_id);
+    const Course &course = manager.getCourse(course_id);
 
-    CompletedCourse completed_course;
-    completed_course.grade = grade;
-    completed_course.course = course;
-    completed_course.semester = semester;
-
+    const CompletedCourse completed_course = {course, semester, grade};
     student.addCompletedCourse(completed_course);
 
     cout << "Student grades: \n";
-    for (CompletedCourse c : student.getCompletedCourses()) {
+    for (const CompletedCourse &c: student.getCompletedCourses()) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
 
+    for (int i = 0; i < student.availableCourses.size(); i++) {
+        if (student.availableCourses[i].getCourseID() == course_id) {
+            student.availableCourses.erase(student.availableCourses.begin() + i);
+        }
+    }
 }
 
-void Admin::updategrade(System_Manager& manager)
-{
+void Admin::updategrade(System_Manager &manager) {
     string stud_id, course_id;
     string new_grade;
     cout << "Enter student id: ";
     cin >> stud_id;
 
-    Student student = manager.getStudent(stud_id);
+    Student &student = manager.getStudent(stud_id);
     vector<CompletedCourse> courses = student.getCompletedCourses();
 
     cout << "Student grades: \n";
-    for (CompletedCourse c : courses) {
+    for (const CompletedCourse &c: courses) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
 
     cout << "Enter course id: ";
     cin >> course_id;
+
+    bool found = false;
+    for (auto &course: courses) {
+        if (course.course.getCourseID() == course_id) {
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "This course id is incorrect.\n";
+        return;
+    }
+
     cout << "Enter new grade: ";
     cin >> new_grade;
 
-    for (CompletedCourse c : courses) {
+    for (CompletedCourse c: courses) {
         if (c.course.getCourseID() == course_id) {
             c.grade = new_grade;
             break;
@@ -375,17 +388,15 @@ void Admin::updategrade(System_Manager& manager)
     }
 
     cout << "Updated student grades: \n";
-    for (CompletedCourse c : courses) {
+    for (const CompletedCourse &c: courses) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
-
 }
 
-void Admin::addStudent(System_Manager& manager)
-{
+void Admin::addStudent(System_Manager &manager) {
     string name, id, year, email;
     cout << "Enter student name: " << "\n";
-    cin >> name;
+    getline(cin, name);
     cout << "Enter student id: " << "\n";
     cin >> id;
     cout << "Enter student year: " << "\n";
@@ -397,8 +408,8 @@ void Admin::addStudent(System_Manager& manager)
     manager.addStudent(id, new_student);
 
     cout << "Student details: " << "\n"
-        << "Name: " << new_student.getName() << "\n"
-        << "ID: " << new_student.getId() << "\n"
-        << "Year : " << new_student.getYear() << "\n"
-        << "E-mail: " << new_student.getEmail() << "\n";
+            << "Name: " << new_student.getName() << "\n"
+            << "ID: " << new_student.getId() << "\n"
+            << "Year : " << new_student.getYear() << "\n"
+            << "E-mail: " << new_student.getEmail() << "\n";
 }

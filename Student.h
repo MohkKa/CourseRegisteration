@@ -14,12 +14,12 @@ class Student {
     std::string name;
     std::string year;
     std::string email;
-    std::string password;
+    std::string password = "123";
 
     std::vector<CompletedCourse> completedCourses;
-    std::vector<Course> availableCourses;
 
 public:
+    std::vector<Course> availableCourses;
     std::vector<Course> registeredCourses;
     std::string id;
 
@@ -62,6 +62,15 @@ public:
     void setPassword(const std::string &newPassword) { password = newPassword; }
 
     bool FindCompletedCourse(const std::string &id) const;
+
+    std::string getAcademicYear() {
+        return this->year;
+    }
+
+    std::string getID() {
+        return this->id;
+    }
+
 };
 
 #endif // STUDENT_H

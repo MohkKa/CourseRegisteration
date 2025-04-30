@@ -1,0 +1,6 @@
+id,title,syllabus,creditHour,instructorName,instructorEmail,prerequisites
+CS101,Introduction to Programming,"Basic programming concepts",3,Dr. Adel,adel@uni.edu,
+CS102,Data Structures,"Data structures and algorithms",3,Dr. Sara,sara@uni.edu,CS101
+CS201,Algorithms,"Algorithm design and analysis",3,Dr. Hany,hany@uni.edu,CS102
+CS301,Operating Systems,"OS fundamentals",4,Dr. Rania,rania@uni.edu,CS201
+CS303,Database Systems,"Database design and SQL",3,Dr. Nabil,nabil@uni.edu,CS102

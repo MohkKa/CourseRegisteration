@@ -1,0 +1,4 @@
+name,id,year,email,gpa,completedCourses,registeredCourses
+Nada,2025001,Second,nada@example.com,3.85,CS101:Spring2023:A-CS201:Fall2023:B+,CS201-PH102
+Ahmed,2025002,Third,ahmed@example.com,3.22,CS101:Fall2022:A-MA101:Spring2023:B-CS201:Fall2023:C,PH103
+Sara,2025003,First,sara@example.com,0,,CS101

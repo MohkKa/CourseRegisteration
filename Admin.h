@@ -47,6 +47,13 @@ public:
     string getUsername();
 
     string getPassword();
+
+    string getId() {
+        return this->id;
+    }
+    string getName() {
+        return this->name;
+    }
 };
 
 

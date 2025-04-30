@@ -155,6 +155,12 @@ void Student::registerCourse() {
             if (checkPrerequisite(course)) {
                 registeredCourses.push_back(course);
                 std::cout << "✅ Course \"" << course.getTitle() << "\" registered successfully!\n";
+                for (int i = 0; i < availableCourses.size(); ++i) {
+                    if (availableCourses[i].getCourseID() == courseID) {
+                        availableCourses.erase(availableCourses.begin() + i);
+                        break;
+                    }
+                }
             } else {
                 std::cout << "❌ You do not meet the prerequisites for \"" << course.getTitle() << "\".\n";
 
@@ -190,6 +196,13 @@ void Student::dropCourse(const std::string &courseID) {
         return course.getCourseID() == courseID;
     });
 
+    for (int i = 0; i < registeredCourses.size(); ++i) {
+        if (registeredCourses[i].getCourseID() == courseID) {
+            addAvailableCourse(registeredCourses[i]);
+            break;
+        }
+    }
+
     if (it != registeredCourses.end()) {
         std::cout << " Course dropped: " << it->getTitle() << " (ID: " << it->getCourseID() << ")\n";
         registeredCourses.erase(it);
@@ -197,6 +210,7 @@ void Student::dropCourse(const std::string &courseID) {
         std::cout << "⚠️ You are not registered in a course with ID: " << courseID << "\n";
     }
 }
+
 
 void Student::generateTranscript() const {
     std::cout << "\n=========== STUDENT TRANSCRIPT ===========\n";
