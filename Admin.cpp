@@ -562,10 +562,10 @@ void Admin::addgrade(System_Manager &manager) {
     student.addCompletedCourse(completed_course);
 
     // Remove from available courses
-    auto &available = student.availableCourses;
+    /*auto &available = student.availableCourses;
     available.erase(remove_if(available.begin(), available.end(),
                               [&](const Course &c) { return c.getCourseID() == course_id; }),
-                    available.end());
+                    available.end());*/
 
     cout << "Student grades:\n";
     for (const CompletedCourse &c : student.getCompletedCourses()) {
