@@ -172,7 +172,7 @@ void Student::registerCourse() {
 
             if (checkPrerequisite(course)) {
                 registeredCourses.push_back(course);
-                std::cout << "✅ Course \"" << course.getTitle() << "\" registered successfully!\n";
+                std::cout << "Course \"" << course.getTitle() << "\" registered successfully!\n";
                 for (int i = 0; i < availableCourses.size(); ++i) {
                     if (availableCourses[i].getCourseID() == courseID) {
                         availableCourses.erase(availableCourses.begin() + i);
@@ -180,7 +180,7 @@ void Student::registerCourse() {
                     }
                 }
             } else {
-                std::cout << "❌ You do not meet the prerequisites for \"" << course.getTitle() << "\".\n";
+                std::cout << "You do not meet the prerequisites for \"" << course.getTitle() << "\".\n";
 
                 std::deque<Course> leftCourses;
                 for (const Course &prereq: course.getPrerequisites()) {
@@ -205,7 +205,7 @@ void Student::registerCourse() {
     }
 
     if (!found) {
-        std::cout << "❌ Course ID not found in available courses.\n";
+        std::cout << "Course ID not found in available courses.\n";
     }
 }
 

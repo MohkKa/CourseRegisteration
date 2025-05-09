@@ -40,7 +40,7 @@ void System_Manager::editStudentPass(const string &id, const string &password) {
         cin >> oldPassword;
         if (students[id].getPassword() == oldPassword) {
             students[id].setPassword(password);
-            cout << "Password successfully changed." << endl;
+            cout << "Password successfully changed.";
             return;
         }
         cout << "Password is incorrect." << endl;

@@ -45,7 +45,8 @@ void loginScreen(System_Manager &manager) {
 
         while (attempts < 3) {
             string input;
-            cout << "Enter choice: ";
+            cout << "Enter choice:";
+
             getline(cin, input);
 
             if (isValidInteger(input)) {
@@ -127,7 +128,7 @@ void adminMenu(System_Manager &manager, Admin &admin) {
 
         while (attempts < 3) {
             string input;
-            cout << "Enter choice: ";
+            cout << "Enter choice:";
             getline(cin, input);
 
             if (isValidInteger(input)) {
@@ -197,9 +198,9 @@ void adminMenu(System_Manager &manager, Admin &admin) {
             }
             case 9: {
                 string newPass, confirmPass;
-                cout << "Enter new password: ";
+                cout << "Enter new password:";
                 getline(cin, newPass);
-                cout << "Confirm password: ";
+                cout << "Confirm password:";
                 getline(cin, confirmPass);
                 if (newPass == confirmPass) {
                     manager.editAdminPass(admin.getUsername(), newPass);
@@ -253,7 +254,7 @@ void studentMenu(System_Manager &manager, Student &student) {
 
         while (attempts < 3) {
             string input;
-            cout << "Enter choice: ";
+            cout << "Enter choice:";
             getline(cin, input);
 
             if (isValidInteger(input)) {
@@ -290,7 +291,7 @@ void studentMenu(System_Manager &manager, Student &student) {
                 break;
             case 4: {
                 string courseID;
-                cout << "Enter course ID to drop: ";
+                cout << "Enter course ID to drop:";
                 getline(cin, courseID);
                 student.dropCourse(courseID);
                 break;
@@ -303,9 +304,9 @@ void studentMenu(System_Manager &manager, Student &student) {
                 break;
             case 7: {
                 string newPass, confirmPass;
-                cout << "Enter new password: ";
+                cout << "Enter new password:";
                 getline(cin, newPass);
-                cout << "Confirm password: ";
+                cout << "Confirm password:";
                 getline(cin, confirmPass);
                 if (newPass == confirmPass) {
                     cout<<"old: "<<student.getPassword()<<endl;
