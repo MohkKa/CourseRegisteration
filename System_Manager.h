@@ -39,11 +39,11 @@ public:
 
     void removeStudent(const string &studentID);
 
-    Student& getStudent(const std::string &id);  // Return reference
+    Student &getStudent(const std::string &id); // Return reference
 
-    Course& getCourse(const std::string &courseID);  // Return reference
+    Course &getCourse(const std::string &courseID); // Return reference
 
-    void showCompletedCourses(string studentId);
+    void showCompletedCourses(const string &studentId);
 
     Admin getAdmin(const string &username);
 

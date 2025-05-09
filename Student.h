@@ -70,7 +70,6 @@ public:
     std::string getID() {
         return this->id;
     }
-
 };
 
 #endif // STUDENT_H

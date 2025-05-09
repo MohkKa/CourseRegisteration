@@ -101,7 +101,6 @@ void Admin::addCourse(System_Manager &manager) {
     manager.courses.insert(make_pair(courseID, newCourse));
     addedCourses.push(courseID);
     cout << "The course was added successfully. " << "\n";
-
 }
 
 void Admin::updateCourse(System_Manager &manager) {

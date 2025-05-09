@@ -6,13 +6,15 @@
 
 using namespace std;
 
-void adminMenu(System_Manager& manager, Admin& admin);
-void studentMenu(System_Manager& manager, Student& student);
-void loginScreen(System_Manager& manager);
+void adminMenu(System_Manager &manager, Admin &admin);
 
-bool isValidInteger(const string& input) {
+void studentMenu(System_Manager &manager, Student &student);
+
+void loginScreen(System_Manager &manager);
+
+bool isValidInteger(const string &input) {
     if (input.empty()) return false;
-    for (char ch : input) {
+    for (char ch: input) {
         if (!isdigit(ch)) return false;
     }
     return true;
@@ -21,48 +23,16 @@ bool isValidInteger(const string& input) {
 int main() {
     System_Manager manager;
 
-    // Load initial data (uncomment when file I/O is implemented)
-     // manager.readAdminsFromFile();
-     // manager.readStudentsFromFile();
-     // manager.readCoursesFromFile();
-
-    if (manager.admins.empty()) {
-        Admin defaultAdmin("ADM001", "Default Admin", "admin", "admin123");
-        manager.admins["admin"] = defaultAdmin;
-    }
-
-    if (manager.students.empty()) {
-        Student defaultStudent("John Doe", "STU001", "2023", "john@uni.edu");
-        defaultStudent.setPassword("student123");
-        manager.students["STU001"] = defaultStudent;
-    }
-
-    if (manager.courses.empty()) {
-        Instructor inst1{"Dr. Smith", "smith@uni.edu"};
-        CourseDescription desc1{"Introduction to Programming", "Basic programming concepts", 3, inst1};
-        Course course1("CS101", desc1);
-
-        Instructor inst2{"Dr. Johnson", "johnson@uni.edu"};
-        CourseDescription desc2{"Data Structures", "Advanced programming concepts", 4, inst2};
-        Course course2("CS201", desc2);
-
-        manager.addCourse("CS101", course1);
-        manager.addCourse("CS201", course2);
-
-        course2.addPrerequisite(course1, manager);
-    }
-
     loginScreen(manager);
-
-    // Save data before exiting (uncomment when file I/O is implemented)
-     // manager.writeAdminsToFile();
-     // manager.writeStudentsToFile();
-     // manager.writeCoursesToFile();
 
     return 0;
 }
 
-void loginScreen(System_Manager& manager) {
+void loginScreen(System_Manager &manager) {
+    manager.readAdminsFromFile();
+    manager.readCoursesFromFile();
+    manager.readStudentsFromFile();
+
     while (true) {
         cout << "\n=== University Course Management System ===" << endl;
         cout << "1. Admin Login" << endl;
@@ -102,8 +72,13 @@ void loginScreen(System_Manager& manager) {
 
         if (choice == 3) {
             cout << "Exiting system..." << endl;
+            manager.writeAdminsToFile();
+            manager.writeStudentsToFile();
+            manager.writeCoursesToFile();
+
             break;
-        } else if (choice == 1 || choice == 2) {
+        }
+        if (choice == 1 || choice == 2) {
             string username, password;
             cout << "Username: ";
             getline(cin, username);
@@ -131,7 +106,7 @@ void loginScreen(System_Manager& manager) {
     }
 }
 
-void adminMenu(System_Manager& manager, Admin& admin) {
+void adminMenu(System_Manager &manager, Admin &admin) {
     while (true) {
         cout << "\n=== ADMIN MENU ===" << endl;
         cout << "1. Add Course" << endl;
@@ -145,7 +120,7 @@ void adminMenu(System_Manager& manager, Admin& admin) {
         cout << "9. Change Password" << endl;
         cout << "10. Logout" << endl;
 
-        int choice;
+        int choice = 0;
         int attempts = 0;
         bool validInput = false;
 
@@ -240,10 +215,10 @@ void adminMenu(System_Manager& manager, Admin& admin) {
     }
 }
 
-void studentMenu(System_Manager& manager, Student& student) {
-    for (const auto& [courseID, course] : manager.courses) {
+void studentMenu(System_Manager &manager, Student &student) {
+    for (const auto &[courseID, course]: manager.courses) {
         bool alreadyRegistered = false;
-        for (const auto& regCourse : student.registeredCourses) {
+        for (const auto &regCourse: student.registeredCourses) {
             if (regCourse.getCourseID() == courseID) {
                 alreadyRegistered = true;
                 break;
@@ -267,7 +242,7 @@ void studentMenu(System_Manager& manager, Student& student) {
         cout << "8. View Completed Courses" << endl;
         cout << "9. Logout" << endl;
 
-        int choice;
+        int choice = 0;
         int attempts = 0;
         bool validInput = false;
 
