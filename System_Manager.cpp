@@ -153,67 +153,6 @@ void System_Manager::removeCourse(const string &courseCode) {
     courses.erase(courseCode);
 }
 
-/*
-
-void System_Manager::setAdmins(const unordered_map<string, Admin> &newAdmins) {
-    // Update existing admins or add new ones
-    for (const auto &pair: newAdmins) {
-        admins[pair.first] = pair.second;
-    }
-
-    // Remove any admins that are not in the newAdmins map
-    for (auto it = admins.begin(); it != admins.end();) {
-        if (newAdmins.find(it->first) == newAdmins.end()) {
-            it = admins.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
-void System_Manager::addAdmin(const string &username, const Admin &admin) {
-    admins[username] = admin;
-}
-
-void System_Manager::removeAdmin(const string &username) {
-    admins.erase(username);
-}
-
-void System_Manager::setCourses(const unordered_map<string, Course> &newCourses) {
-    // Update existing courses or add new ones
-    for (const auto &pair: newCourses) {
-        courses[pair.first] = pair.second;
-    }
-
-    // Remove any courses that are not in the newCourses map
-    for (auto it = courses.begin(); it != courses.end();) {
-        if (newCourses.find(it->first) == newCourses.end()) {
-            it = courses.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
-
-void System_Manager::setStudents(const unordered_map<string, Student> &newStudents) {
-    // Update existing students or add new ones
-    for (const auto &pair: newStudents) {
-        students[pair.first] = pair.second;
-    }
-
-    // Remove any students that are not in the newStudents map
-    for (auto it = students.begin(); it != students.end();) {
-        if (newStudents.find(it->first) == newStudents.end()) {
-            it = students.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
-*/
-
 void System_Manager::showCompletedCourses(string studentId) {
     Student student=students[studentId];
     cout<<"You completed the following courses: "<<endl;
@@ -224,7 +163,7 @@ void System_Manager::showCompletedCourses(string studentId) {
 }
 
 void System_Manager::readAdminsFromFile() {
-    ifstream file("..\\..\\..\\..\\Data/admins.csv");
+    std::ifstream file("..\\..\\..\\Data/admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -258,7 +197,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    ofstream file("..\\..\\..\\..\\Data/admins.csv");
+    std::ofstream file("..\\..\\..\\Data/admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -275,7 +214,7 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("..\\..\\..\\..\\Data/courses.csv");
+    std::ifstream file("..\\..\\..\\Data/courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
@@ -332,7 +271,8 @@ void System_Manager::readCoursesFromFile() {
 }
 
 void System_Manager::writeCoursesToFile() {
-    std::ofstream file("..\\..\\..\\..\\Data/courses.csv");
+    std::ofstream file("..\\..\\..\\Data/courses.csv");
+
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for writing.\n";
         return;
@@ -361,7 +301,7 @@ void System_Manager::writeCoursesToFile() {
 }
 
 void System_Manager::readStudentsFromFile() {
-    std::ifstream file("..\\..\\..\\..\\Data/students.csv");
+    std::ifstream file("..\\..\\..\\Data/students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for reading.\n";
         return;
@@ -446,7 +386,7 @@ void System_Manager::readStudentsFromFile() {
 }
 
 void System_Manager::writeStudentsToFile() {
-    std::ofstream file("..\\..\\..\\..\\Data/students.csv");
+    std::ofstream file("..\\..\\..\\Data/students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for writing.\n";
         return;

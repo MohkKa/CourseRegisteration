@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 void adminMenu(System_Manager& manager, Admin& admin);
 void studentMenu(System_Manager& manager, Student& student);
 void loginScreen(System_Manager& manager);
@@ -23,9 +22,9 @@ int main() {
     System_Manager manager;
 
     // Load initial data (uncomment when file I/O is implemented)
-    // manager.readAdminsFromFile();
-    // manager.readStudentsFromFile();
-    // manager.readCoursesFromFile();
+     // manager.readAdminsFromFile();
+     // manager.readStudentsFromFile();
+     // manager.readCoursesFromFile();
 
     if (manager.admins.empty()) {
         Admin defaultAdmin("ADM001", "Default Admin", "admin", "admin123");
@@ -39,7 +38,6 @@ int main() {
     }
 
     if (manager.courses.empty()) {
-        // Add some sample courses if none exist
         Instructor inst1{"Dr. Smith", "smith@uni.edu"};
         CourseDescription desc1{"Introduction to Programming", "Basic programming concepts", 3, inst1};
         Course course1("CS101", desc1);
@@ -57,9 +55,9 @@ int main() {
     loginScreen(manager);
 
     // Save data before exiting (uncomment when file I/O is implemented)
-    // manager.writeAdminsToFile();
-    // manager.writeStudentsToFile();
-    // manager.writeCoursesToFile();
+     // manager.writeAdminsToFile();
+     // manager.writeStudentsToFile();
+     // manager.writeCoursesToFile();
 
     return 0;
 }
@@ -71,8 +69,7 @@ void loginScreen(System_Manager& manager) {
         cout << "2. Student Login" << endl;
         cout << "3. Exit" << endl;
 
-
-        int choice;
+        int choice = 0;
         int attempts = 0;
         bool validInput = false;
 
@@ -83,15 +80,15 @@ void loginScreen(System_Manager& manager) {
 
             if (isValidInteger(input)) {
                 try {
-                    choice = stoi(input);  // Safely convert string to int
+                    choice = stoi(input);
                     validInput = true;
                     break;
                 } catch (...) {
                     cout << "Conversion error. Try again...." << endl;
                     attempts++;
                 }
-            }  else {
-                if (attempts<2) {
+            } else {
+                if (attempts < 2) {
                     cout << "Invalid input. Please enter a valid integer (digits only)." << endl;
                 }
                 attempts++;
@@ -100,13 +97,13 @@ void loginScreen(System_Manager& manager) {
 
         if (!validInput) {
             cout << "Too many invalid attempts. Try again later...." << endl;
-            return ; // Or exit(0);
+            return;
         }
+
         if (choice == 3) {
             cout << "Exiting system..." << endl;
             break;
-        }
-        else if (choice==1 or choice==2) {
+        } else if (choice == 1 || choice == 2) {
             string username, password;
             cout << "Username: ";
             getline(cin, username);
@@ -117,20 +114,19 @@ void loginScreen(System_Manager& manager) {
                 if (manager.admins.contains(username) &&
                     manager.admins[username].getPassword() == password) {
                     adminMenu(manager, manager.admins[username]);
-                    } else {
-                        cout << "Invalid admin credentials!" << endl;
-                    }
-            }
-            else if (choice == 2) {
+                } else {
+                    cout << "Invalid admin credentials!" << endl;
+                }
+            } else if (choice == 2) {
                 if (manager.students.contains(username) &&
                     manager.students[username].getPassword() == password) {
                     studentMenu(manager, manager.students[username]);
-                    } else {
-                        cout << "Invalid student credentials!" << endl;
-                    }
+                } else {
+                    cout << "Invalid student credentials!" << endl;
+                }
             }
-        }else {
-            cout<<"Invalid choice!"<<endl;
+        } else {
+            cout << "Invalid choice!" << endl;
         }
     }
 }
@@ -149,7 +145,6 @@ void adminMenu(System_Manager& manager, Admin& admin) {
         cout << "9. Change Password" << endl;
         cout << "10. Logout" << endl;
 
-
         int choice;
         int attempts = 0;
         bool validInput = false;
@@ -161,15 +156,15 @@ void adminMenu(System_Manager& manager, Admin& admin) {
 
             if (isValidInteger(input)) {
                 try {
-                    choice = stoi(input);  // Safely convert string to int
+                    choice = stoi(input);
                     validInput = true;
                     break;
                 } catch (...) {
                     cout << "Conversion error. Try again...." << endl;
                     attempts++;
                 }
-            }  else {
-                if (attempts<2) {
+            } else {
+                if (attempts < 2) {
                     cout << "Invalid input. Please enter a valid integer (digits only)." << endl;
                 }
                 attempts++;
@@ -178,7 +173,7 @@ void adminMenu(System_Manager& manager, Admin& admin) {
 
         if (!validInput) {
             cout << "Too many invalid attempts. Returning to main menu...." << endl;
-            return ; // Or exit(0);
+            return;
         }
 
         switch (choice) {
@@ -204,6 +199,7 @@ void adminMenu(System_Manager& manager, Admin& admin) {
                 int gradeChoice;
                 cout << "1. Add Grade\n2. Update Grade\nChoice: ";
                 cin >> gradeChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 if (gradeChoice == 1) {
                     admin.addgrade(manager);
                 } else if (gradeChoice == 2) {
@@ -215,6 +211,7 @@ void adminMenu(System_Manager& manager, Admin& admin) {
                 int prereqChoice;
                 cout << "1. Add Prerequisite\n2. Remove Prerequisite\nChoice: ";
                 cin >> prereqChoice;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 if (prereqChoice == 1) {
                     admin.addPrereq(manager);
                 } else if (prereqChoice == 2) {
@@ -223,10 +220,16 @@ void adminMenu(System_Manager& manager, Admin& admin) {
                 break;
             }
             case 9: {
-                string newPass;
+                string newPass, confirmPass;
                 cout << "Enter new password: ";
                 getline(cin, newPass);
-                manager.editAdminPass(admin.getUsername(), newPass);
+                cout << "Confirm password: ";
+                getline(cin, confirmPass);
+                if (newPass == confirmPass) {
+                    manager.editAdminPass(admin.getUsername(), newPass);
+                } else {
+                    cout << "Passwords do not match." << endl;
+                }
                 break;
             }
             case 10:
@@ -238,7 +241,6 @@ void adminMenu(System_Manager& manager, Admin& admin) {
 }
 
 void studentMenu(System_Manager& manager, Student& student) {
-    // Update available courses for the student
     for (const auto& [courseID, course] : manager.courses) {
         bool alreadyRegistered = false;
         for (const auto& regCourse : student.registeredCourses) {
@@ -262,10 +264,10 @@ void studentMenu(System_Manager& manager, Student& student) {
         cout << "5. View Grades" << endl;
         cout << "6. Generate Transcript" << endl;
         cout << "7. Change Password" << endl;
-        cout<<"8. View Completed Courses"<<endl;
+        cout << "8. View Completed Courses" << endl;
         cout << "9. Logout" << endl;
 
-       int choice;
+        int choice;
         int attempts = 0;
         bool validInput = false;
 
@@ -276,15 +278,15 @@ void studentMenu(System_Manager& manager, Student& student) {
 
             if (isValidInteger(input)) {
                 try {
-                    choice = stoi(input);  // Safely convert string to int
+                    choice = stoi(input);
                     validInput = true;
                     break;
                 } catch (...) {
                     cout << "Conversion error. Try again...." << endl;
                     attempts++;
                 }
-            }  else {
-                if (attempts<2) {
+            } else {
+                if (attempts < 2) {
                     cout << "Invalid input. Please enter a valid integer (digits only)." << endl;
                 }
                 attempts++;
@@ -293,19 +295,19 @@ void studentMenu(System_Manager& manager, Student& student) {
 
         if (!validInput) {
             cout << "Too many invalid attempts. Returning to main menu...." << endl;
-            return ; // Or exit(0);
+            return;
         }
 
         switch (choice) {
             case 1:
                 student.showAvailableCourses();
-            break;
+                break;
             case 2:
                 manager.showEligibleCourses(student.getId());
-            break;
+                break;
             case 3:
                 student.registerCourse();
-            break;
+                break;
             case 4: {
                 string courseID;
                 cout << "Enter course ID to drop: ";
@@ -315,21 +317,28 @@ void studentMenu(System_Manager& manager, Student& student) {
             }
             case 5:
                 student.viewGrade();
-            break;
+                break;
             case 6:
                 student.generateTranscript();
-            break;
+                break;
             case 7: {
-                string newPass;
+                string newPass, confirmPass;
                 cout << "Enter new password: ";
                 getline(cin, newPass);
-                manager.editStudentPass(student.getId(), newPass);
+                cout << "Confirm password: ";
+                getline(cin, confirmPass);
+                if (newPass == confirmPass) {
+                    manager.editStudentPass(student.getId(), newPass);
+                } else {
+                    cout << "Passwords do not match." << endl;
+                }
                 break;
             }
             case 8:
-               manager.showCompletedCourses(student.getId());
-            case 9:
+                manager.showCompletedCourses(student.getId());
                 break;
+            case 9:
+                return;
             default:
                 cout << "Invalid choice!" << endl;
         }
