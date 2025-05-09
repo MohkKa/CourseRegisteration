@@ -163,7 +163,7 @@ void System_Manager::showCompletedCourses(const string& studentId) {
 }
 
 void System_Manager::readAdminsFromFile() {
-    std::ifstream file("N:\\Data\\admins.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -193,7 +193,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    std::ofstream file("N:\\Data\\admins.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -210,7 +210,7 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("N:\\Data\\courses.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
@@ -258,7 +258,7 @@ void System_Manager::readCoursesFromFile() {
 }
 
 void System_Manager::writeCoursesToFile() {
-    std::ofstream file("N:\\Data\\courses.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
 
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for writing.\n";
@@ -288,7 +288,7 @@ void System_Manager::writeCoursesToFile() {
 }
 
 void System_Manager::readStudentsFromFile() {
-    std::ifstream file("N:\\Data\\students.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for reading.\n";
         return;
@@ -299,17 +299,18 @@ void System_Manager::readStudentsFromFile() {
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        std::string name, id, yearStr, email, completedCoursesStr, registeredCoursesStr, semester;
+        std::string name, id,password, yearStr, email, completedCoursesStr, registeredCoursesStr, semester;
 
         std::getline(ss, name, ',');
         std::getline(ss, id, ',');
         std::getline(ss, yearStr, ',');
         std::getline(ss, email, ',');
+        std::getline(ss,password, ',');
         std::getline(ss, completedCoursesStr, ',');
         std::getline(ss, registeredCoursesStr, ',');
         std::getline(ss, semester);
 
-        Student student(name, id, yearStr, email);
+        Student student(name, id, yearStr, email,password);
 
         if (!completedCoursesStr.empty()) {
             std::stringstream completedStream(completedCoursesStr);
@@ -358,20 +359,21 @@ void System_Manager::readStudentsFromFile() {
 }
 
 void System_Manager::writeStudentsToFile() {
-    std::ofstream file("N:\\Data\\students.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for writing.\n";
         return;
     }
 
 
-    file << "name,id,year,email,gpa,completedCourses,registeredCourses,completedCreditHours\n";
+    file << "name,id,year,email,password,gpa,completedCourses,registeredCourses,completedCreditHours\n";
 
     for (auto& [fst, snd] : students) {
         file << snd.getName() << ","
             << snd.getId() << ","
             << snd.getYear() << ","
-            << snd.getEmail() << ",";
+            << snd.getEmail() << ","
+        <<snd.getPassword()<< ",";
 
         const auto& completedCourses = snd.getCompletedCourses();
         for (size_t i = 0; i < completedCourses.size(); ++i) {

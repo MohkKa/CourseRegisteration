@@ -1,6 +1,6 @@
-name,id,year,email,gpa,completedCourses,registeredCourses,completedCreditHours
-nada,S124,2,nada@email.com,,CS201
-ahmed,S123,1,ahmed@email.com,,
-sama,S125,3,mo@email.com,,
-youmna,s126,4,yo@gmail.com,,
-nada,s127,3,n@gmail.com,,
+name,id,year,email,password,gpa,completedCourses,registeredCourses,completedCreditHours
+youmna,s126,4,yo@gmail.com,123,,
+sama,S125,3,mo@email.com,123,,
+ahmed,S123,1,ahmed@email.com,123,,
+nada,s127,3,n@gmail.com,123,,
+nada,S124,2,nada@email.com,12345,,

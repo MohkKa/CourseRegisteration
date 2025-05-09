@@ -79,23 +79,23 @@ void loginScreen(System_Manager &manager) {
             break;
         }
         if (choice == 1 || choice == 2) {
-            string username, password;
-            cout << "Username: ";
-            getline(cin, username);
+            string ID, password;
+            cout << "ID: ";
+            getline(cin, ID);
             cout << "Password: ";
             getline(cin, password);
 
             if (choice == 1) {
-                if (manager.admins.contains(username) &&
-                    manager.admins[username].getPassword() == password) {
-                    adminMenu(manager, manager.admins[username]);
+                if (manager.admins.contains(ID) &&
+                    manager.admins[ID].getPassword() == password) {
+                    adminMenu(manager, manager.admins[ID]);
                 } else {
                     cout << "Invalid admin credentials!" << endl;
                 }
             } else if (choice == 2) {
-                if (manager.students.contains(username) &&
-                    manager.students[username].getPassword() == password) {
-                    studentMenu(manager, manager.students[username]);
+                if (manager.students.contains(ID) &&
+                    manager.students[ID].getPassword() == password) {
+                    studentMenu(manager, manager.students[ID]);
                 } else {
                     cout << "Invalid student credentials!" << endl;
                 }
@@ -118,7 +118,8 @@ void adminMenu(System_Manager &manager, Admin &admin) {
         cout << "7. Add/Update Grades" << endl;
         cout << "8. Manage Prerequisites" << endl;
         cout << "9. Change Password" << endl;
-        cout << "10. Logout" << endl;
+        cout << "10. Add Admin" << endl;
+        cout << "11. Logout" << endl;
 
         int choice = 0;
         int attempts = 0;
@@ -206,8 +207,12 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                     cout << "Passwords do not match." << endl;
                 }
                 break;
+            } case 10:
+            {
+                admin.addAdmin(manager);
+                break;
             }
-            case 10:
+            case 11 :
                 return;
             default:
                 cout << "Invalid choice!" << endl;
@@ -303,7 +308,9 @@ void studentMenu(System_Manager &manager, Student &student) {
                 cout << "Confirm password: ";
                 getline(cin, confirmPass);
                 if (newPass == confirmPass) {
+                    cout<<"old: "<<student.getPassword()<<endl;
                     manager.editStudentPass(student.getId(), newPass);
+                   cout<<"new: "<< student.getPassword();
                 } else {
                     cout << "Passwords do not match." << endl;
                 }

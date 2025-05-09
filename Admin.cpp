@@ -668,3 +668,26 @@ void Admin::addStudent(System_Manager &manager) {
          << "Year : " << new_student.getYear() << "\n"
          << "E-mail: " << new_student.getEmail() << "\n";
 }
+void  Admin :: addAdmin (System_Manager & manager ){
+
+
+    string name, id, email, password;
+    cout << "Enter Admin name: " << "\n";
+    getline(cin, name);
+    cout << "Enter Admin id: " << "\n";
+    cin >> id;
+    cout << "Enter Admin e-mail: " << "\n";
+    cin >> email;
+    cout << "Enter Admin password: " << "\n";
+    cin >> password;
+
+    Admin new_admin (id , name , email , password );
+    manager.admins.insert(make_pair(id , new_admin));
+
+    cout << "Admin details: " << "\n"
+            << "ID: " << id << "\n"
+            << "Name: " << name << "\n"
+            << "Email : " << email << "\n"
+            << "Password: " << password << "\n";
+
+}

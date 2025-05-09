@@ -3,13 +3,31 @@
 #include <iostream>
 
 Student::Student(const std::string &name, const std::string &id,
-                 const std::string &year, const std::string &email) {
+           const std::string &year, const std::string &email) {
     this->name = name;
     this->id = id;
     this->year = year;
     this->email = email;
 }
 
+Student::Student(const std::string &name, const std::string &id,
+                 const std::string &year, const std::string &email,const std::string &password) {
+    this->name = name;
+    this->id = id;
+    this->year = year;
+    this->email = email;
+    this->password=password;
+}
+double Student::totalCompletedCreditHours(){
+
+    double totalHours = 0;
+    for (const auto& completedCourse : completedCourses) {
+        totalHours += completedCourse.course.getCreditHour();
+    }
+    return totalHours;
+
+
+}
 void Student::addCompletedCourse(const CompletedCourse &course) {
     if (convertGradeToGPA(course.grade) == -1) {
         throw std::invalid_argument("Invalid grade provided for completed course");

@@ -27,6 +27,8 @@ public:
 
     Student(const std::string &name, const std::string &id,
             const std::string &year, const std::string &email);
+    Student(const std::string &name, const std::string &id,
+           const std::string &year, const std::string &email,const std::string &password);
 
     void viewGrade() const;
 
@@ -54,7 +56,7 @@ public:
     void dropCourse(const std::string &courseID);
 
     void generateTranscript() const;
-
+    double totalCompletedCreditHours();
     std::vector<Course> getRegisteredCourses() const { return registeredCourses; }
     std::vector<Course> getAvailableCourses() const { return availableCourses; }
     std::vector<CompletedCourse> getCompletedCourses() const { return completedCourses; }
