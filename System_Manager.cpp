@@ -1,5 +1,6 @@
 #include "System_Manager.h"
 #include <iostream>
+#include<sstream>
 #include <fstream>
 #include "Student.h"
 
@@ -162,8 +163,10 @@ void System_Manager::showCompletedCourses(const string& studentId) {
     }
 }
 
+//C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv
+
 void System_Manager::readAdminsFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
+    std::ifstream file("..//..//..//Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -193,7 +196,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
+    std::ofstream file("..//..//..//Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -210,7 +213,7 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
+    std::ifstream file("..//..//..//Data\\courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
@@ -258,7 +261,7 @@ void System_Manager::readCoursesFromFile() {
 }
 
 void System_Manager::writeCoursesToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
+    std::ofstream file("..//..//..//Data\\courses.csv");
 
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for writing.\n";
@@ -288,7 +291,7 @@ void System_Manager::writeCoursesToFile() {
 }
 
 void System_Manager::readStudentsFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
+    std::ifstream file("..//..//..//Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for reading.\n";
         return;
@@ -359,7 +362,7 @@ void System_Manager::readStudentsFromFile() {
 }
 
 void System_Manager::writeStudentsToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
+    std::ofstream file("..//..//..//Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for writing.\n";
         return;
@@ -373,11 +376,12 @@ void System_Manager::writeStudentsToFile() {
             << snd.getId() << ","
             << snd.getYear() << ","
             << snd.getEmail() << ","
-        <<snd.getPassword()<< ",";
+            <<snd.getPassword()<< ","
+            <<snd.calcGPA()<< ",";
 
         const auto& completedCourses = snd.getCompletedCourses();
         for (size_t i = 0; i < completedCourses.size(); ++i) {
-            file << completedCourses[i].course.getCourseID() << ":" << completedCourses[i].semester;
+            file << completedCourses[i].course.getCourseID() << ":" << completedCourses[i].semester << ":" << completedCourses[i].grade;
             if (i < completedCourses.size() - 1) {
                 file << "-";
             }
@@ -392,6 +396,8 @@ void System_Manager::writeStudentsToFile() {
                 file << "-";
             }
         }
+        file << ",";
+        file << snd.totalCompletedCreditHours();
 
         file << "\n";
     }

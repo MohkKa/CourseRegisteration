@@ -1,7 +1,3 @@
 name,id,year,email,password,gpa,completedCourses,registeredCourses,completedCreditHours
-hana mazen,202345689,2,hana@gmail.com,12345,,HUM123
-youmna,s126,4,yo@gmail.com,123,,
-sama,S125,3,mo@email.com,123,,
-ahmed,S123,1,ahmed@email.com,123,,
-nada,s127,3,n@gmail.com,123,,
-nada,S124,2,nada@email.com,12345,,
+hana mazen,202345689,2,hana@gmail.com,12345,0,,,0
+nada,2023170662,2,nada@gmail.com,112200,0,,,0

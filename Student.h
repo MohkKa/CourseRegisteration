@@ -55,7 +55,7 @@ public:
 
     void dropCourse(const std::string &courseID);
 
-    void generateTranscript() const;
+    void generateTranscript() const ;
     double totalCompletedCreditHours();
     std::vector<Course> getRegisteredCourses() const { return registeredCourses; }
     std::vector<Course> getAvailableCourses() const { return availableCourses; }

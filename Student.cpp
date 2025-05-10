@@ -1,5 +1,7 @@
 #include "Student.h"
 #include <algorithm>
+#include<fstream> 
+#include<string>
 #include <iostream>
 
 Student::Student(const std::string &name, const std::string &id,
@@ -266,6 +268,37 @@ void Student::generateTranscript() const {
 
     std::cout << "===========================================\n";
 }
+
+
+/*void Student::generateTranscript(const Student& student) {
+    std::ofstream reportFile(student.id + "_GradeReport.txt");
+
+    if (!reportFile) {
+        std::cerr << "Failed to create report file.\n";
+        return;
+    }
+
+    reportFile << "Student Name: " << student.name << "\n";
+    reportFile << "Student ID: " << student.id << "\n\n";
+
+    reportFile << std::left << std::setw(30) << "Course Name"
+        << std::setw(15) << "Semester"
+        << std::setw(10) << "Grade" << "\n";
+    reportFile << std::string(55, '-') << "\n";
+
+    for (const auto& course : student.completedCourses) {
+        reportFile << std::left << std::setw(30) << course.course.getCourseID()
+            << std::setw(15) << course.course.getTitle()
+            << std::setw(15) << course.semester
+            << std::setw(10) << std::fixed << std::setprecision(2) << course.grade << "\n";
+    }
+
+    double gpa = calcGPA();
+    reportFile << "\nOverall GPA: " << std::fixed << std::setprecision(2) << gpa << "\n";
+
+    reportFile.close();
+    std::cout << "Grade report generated: " << student.id + "_GradeReport.txt" << "\n";
+}*/
 
 bool Student::FindCompletedCourse(const std::string &id) const {
     for (auto &c: completedCourses) {
