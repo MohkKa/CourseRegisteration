@@ -55,6 +55,8 @@ public:
     string getName() {
         return this->name;
     }
+
+    void addAdmin(System_Manager &manager);
 };
 
 

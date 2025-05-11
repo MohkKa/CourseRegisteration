@@ -3,6 +3,15 @@
 #include <iostream>
 
 Student::Student(const std::string &name, const std::string &id,
+                 const std::string &year, const std::string &email, const std::string &password) {
+    this->name = name;
+    this->id = id;
+    this->year = year;
+    this->email = email;
+    this->password = password;
+}
+
+Student::Student(const std::string &name, const std::string &id,
                  const std::string &year, const std::string &email) {
     this->name = name;
     this->id = id;
@@ -10,12 +19,15 @@ Student::Student(const std::string &name, const std::string &id,
     this->email = email;
 }
 
+
 void Student::addCompletedCourse(const CompletedCourse &course) {
     if (convertGradeToGPA(course.grade) == -1) {
+        std::cerr << "Invalid grade: '" << course.grade << "'\n"; // ADD THIS LINE
         throw std::invalid_argument("Invalid grade provided for completed course");
     }
     completedCourses.push_back(course);
 }
+
 
 void Student::addAvailableCourse(const Course &course) {
     availableCourses.push_back(course);

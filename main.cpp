@@ -201,7 +201,7 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 cout << "Confirm password: ";
                 getline(cin, confirmPass);
                 if (newPass == confirmPass) {
-                    manager.editAdminPass(admin.getUsername(), newPass);
+                    manager.editAdminPass(admin.getId(), newPass);
                 } else {
                     cout << "Passwords do not match." << endl;
                 }

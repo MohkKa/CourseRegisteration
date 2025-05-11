@@ -1,14 +1,15 @@
 #include "System_Manager.h"
 #include <iostream>
+#include<sstream>
 #include <fstream>
 #include "Student.h"
 
 System_Manager::System_Manager() = default;
 
-void System_Manager::editAdminPass(const string &username, const string &password) {
+void System_Manager::editAdminPass(const string &id, const string &password) {
     int i = 3;
     while (i--) {
-        if (!admins.contains(username)) {
+        if (!admins.contains(id)) {
             cout << "This username does not exist." << endl;
             return;
         }
@@ -17,8 +18,8 @@ void System_Manager::editAdminPass(const string &username, const string &passwor
         cout << "Enter your old password:" << endl;
         cin >> oldPassword;
 
-        if (admins[username].getPassword() == oldPassword) {
-            admins[username].setPassword(password);
+        if (admins[id].getPassword() == oldPassword) {
+            admins[id].setPassword(password);
             cout << "Password successfully changed." << endl;
             return;
         }
@@ -40,7 +41,7 @@ void System_Manager::editStudentPass(const string &id, const string &password) {
         cin >> oldPassword;
         if (students[id].getPassword() == oldPassword) {
             students[id].setPassword(password);
-            cout << "Password successfully changed." << endl;
+            cout << "Password successfully changed.";
             return;
         }
         cout << "Password is incorrect." << endl;
@@ -292,29 +293,32 @@ void System_Manager::readStudentsFromFile() {
     }
 
     std::string line;
-    std::getline(file, line);
+    std::getline(file, line); // skip header
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        std::string name, id, yearStr, email, completedCoursesStr, registeredCoursesStr, semester;
+        std::string name, id, yearStr, email, password, completedCoursesStr, registeredCoursesStr;
 
         std::getline(ss, name, ',');
         std::getline(ss, id, ',');
         std::getline(ss, yearStr, ',');
         std::getline(ss, email, ',');
+        std::getline(ss, password, ',');
         std::getline(ss, completedCoursesStr, ',');
         std::getline(ss, registeredCoursesStr, ',');
-        std::getline(ss, semester);
 
-        Student student(name, id, yearStr, email);
+        Student student(name, id, yearStr, email, password);
 
         if (!completedCoursesStr.empty()) {
             std::stringstream completedStream(completedCoursesStr);
             std::string courseData;
+
             while (std::getline(completedStream, courseData, '-')) {
                 std::stringstream courseGradeStream(courseData);
-                std::string courseId, gradeStr;
+                std::string courseId, semester, gradeStr;
+
                 std::getline(courseGradeStream, courseId, ':');
+                std::getline(courseGradeStream, semester, ':');
                 std::getline(courseGradeStream, gradeStr);
 
                 if (courses.contains(courseId)) {
@@ -324,6 +328,7 @@ void System_Manager::readStudentsFromFile() {
                     try {
                         student.addCompletedCourse(C);
                     } catch (const std::invalid_argument &e) {
+                        std::cerr << "Invalid grade: '" << gradeStr << "'\n";
                         std::cerr << "Error: " << e.what() << std::endl;
                     }
                 } else {
@@ -358,17 +363,19 @@ void System_Manager::writeStudentsToFile() {
     }
 
 
-    file << "name,id,year,email,completedCourses,registeredCourses,completedCreditHours\n";
+    file << "name,id,year,email,password,completedCourses,registeredCourses\n";
 
     for (auto &[fst, snd]: students) {
         file << snd.getName() << ","
                 << snd.getId() << ","
                 << snd.getYear() << ","
-                << snd.getEmail() << ",";
+                << snd.getEmail() << ","
+                << snd.getPassword() << ",";
+
 
         const auto &completedCourses = snd.getCompletedCourses();
         for (size_t i = 0; i < completedCourses.size(); ++i) {
-            file << completedCourses[i].course.getCourseID() << ":" << completedCourses[i].semester;
+            file << completedCourses[i].course.getCourseID() << ":" << completedCourses[i].semester << ':' << completedCourses[i].grade;
             if (i < completedCourses.size() - 1) {
                 file << "-";
             }

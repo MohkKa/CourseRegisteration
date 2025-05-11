@@ -26,7 +26,10 @@ public:
     Student() = default;
 
     Student(const std::string &name, const std::string &id,
-            const std::string &year, const std::string &email);
+        const std::string &year, const std::string &email);
+
+    Student(const std::string &name, const std::string &id,
+            const std::string &year, const std::string &email, const std::string &password);
 
     void viewGrade() const;
 
