@@ -118,7 +118,9 @@ void adminMenu(System_Manager &manager, Admin &admin) {
         cout << "7. Add/Update Grades" << endl;
         cout << "8. Manage Prerequisites" << endl;
         cout << "9. Change Password" << endl;
-        cout << "10. Logout" << endl;
+        cout<< "10.undo update"<<endl;
+        cout << "11. Logout" << endl;
+
 
         int choice = 0;
         int attempts = 0;
@@ -207,7 +209,21 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 }
                 break;
             }
-            case 10:
+            case 10:{
+                string  id;
+                cout<<"enter course id";
+                cin>>id;
+                if (manager.courses.find(id) != manager.courses.end()) {
+                    Course course = manager.getCourse(id);
+                    Course pre_update = course.undoupdate(course);
+                    course.displayAfterUndo(pre_update);
+                } else
+                {
+                    cout << "Course not found!" << endl;
+                }
+
+            }
+            case 11:
                 return;
             default:
                 cout << "Invalid choice!" << endl;
@@ -240,8 +256,7 @@ void studentMenu(System_Manager &manager, Student &student) {
         cout << "6. Generate Transcript" << endl;
         cout << "7. Change Password" << endl;
         cout << "8. View Completed Courses" << endl;
-        cout << "9. Undo or Update" << endl;
-        cout << "10. Logout" << endl;
+        cout << "9. logout" << endl;
 
         int choice = 0;
         int attempts = 0;
@@ -325,16 +340,7 @@ void studentMenu(System_Manager &manager, Student &student) {
             case 8:
                 manager.showCompletedCourses(student.getId());
                 break;
-            case 9: {
-                string  id;
-                cout<<"enter course id";
-                cin>>id;
-                Course course=manager.getCourse(id);
-                Course pre_update= course.undoupdate(course);
-                course.displayAfterUndo(pre_update);
-                break;
-            }
-            case 10:
+            case 9:
                 return;
             default:
                 cout << "Invalid choice!" << endl;
