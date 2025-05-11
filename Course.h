@@ -1,6 +1,10 @@
 #ifndef COURSE_H
 #define COURSE_H
-
+#include<stack>
+#include <string>
+#include <vector>
+#include <iomanip>
+using namespace std;
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -19,10 +23,16 @@ struct CourseDescription {
     Instructor instructor;
 };
 
+struct CourseState {
+    string ID;
+    CourseDescription description;
+};
+
 class Course {
     std::string courseID;
     CourseDescription courseDescription;
     std::vector<Course> prerequisites;
+    stack<CourseState> history;
 
 public:
     Course();
@@ -66,11 +76,13 @@ public:
     void addPrerequisite(const Course &course, const System_Manager &manager);
 
     void clearPrerequisites();
+    void Backupdata(Course);
 
     void showCourseDescription() const;
 
     void showPrerequisites() const;
-
+    Course undoupdate(Course);
+    void displayAfterUndo(Course) const;
     void addCourse(Course course);
 };
 

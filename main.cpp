@@ -246,7 +246,8 @@ void studentMenu(System_Manager &manager, Student &student) {
         cout << "6. Generate Transcript" << endl;
         cout << "7. Change Password" << endl;
         cout << "8. View Completed Courses" << endl;
-        cout << "9. Logout" << endl;
+        cout << "9. Undo or Update" << endl;
+        cout << "10. Logout" << endl;
 
         int choice = 0;
         int attempts = 0;
@@ -320,7 +321,16 @@ void studentMenu(System_Manager &manager, Student &student) {
             case 8:
                 manager.showCompletedCourses(student.getId());
                 break;
-            case 9:
+            case 9: {
+                string  id;
+                cout<<"enter course id";
+                cin>>id;
+                Course course=manager.getCourse(id);
+                Course pre_update= course.undoupdate(course);
+                course.displayAfterUndo(pre_update);
+                break;
+            }
+            case 10:
                 return;
             default:
                 cout << "Invalid choice!" << endl;

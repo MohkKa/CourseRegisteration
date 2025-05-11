@@ -18,13 +18,14 @@ Student::Student(const std::string &name, const std::string &id,
     this->email = email;
     this->password=password;
 }
-double Student::totalCompletedCreditHours(){
+double Student::totalCompletedCreditHours(Student s){
 
     double totalHours = 0;
-    for (const auto& completedCourse : completedCourses) {
+    for (const auto& completedCourse : s.completedCourses) {
         totalHours += completedCourse.course.getCreditHour();
     }
     return totalHours;
+
 
 
 }

@@ -192,6 +192,7 @@ void Admin::updateCourse(System_Manager &manager) {
 
     // Get menu choice with validation
     int choice;
+    courseToUpdate.Backupdata(courseToUpdate);
     while (true) {
         try {
             cout << "What would you like to update:\n"

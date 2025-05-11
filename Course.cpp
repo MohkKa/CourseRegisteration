@@ -1,8 +1,8 @@
 #include "Course.h"
-#include <iostream>
 #include <utility>
+#include<iostream>
 #include "System_Manager.h"
-
+using namespace std;
 Course::Course() : courseDescription{"", "", 0, {"", ""}} {
 }
 
@@ -108,6 +108,32 @@ void Course::showCourseDescription() const {
             << std::setw(VALUE_WIDTH) << courseDescription.creditHour << "\n"
             << std::setw(LABEL_WIDTH) << "Syllabus:"
             << std::setw(VALUE_WIDTH) << courseDescription.syllabus << "\n\n";
+}
+void Course::Backupdata(Course course) {
+    CourseState state = {course.getCourseID(), course.getDescription()};
+    course.history.push(state);
+}
+Course Course::undoupdate(Course course) {
+
+    if (!course.history.empty()) {
+        CourseState prevState = course.history.top();
+        course. history.pop();
+        course.courseID = prevState.ID;
+        course. courseDescription = prevState.description;
+        cout << "Undo successful.\n";
+    } else {
+        cout << "No previous states to undo.\n";
+    }
+    return course;
+}
+
+void Course::displayAfterUndo(Course course) const {
+    cout << "\n--- Course Info After Undo ---\n";
+    cout<<course.getCourseID()<<endl;
+    cout<<course.getDescription().title<<endl;
+    cout<<course.getDescription().creditHour<<endl;
+    cout<<course.getDescription().syllabus<<endl;
+    cout << "------------------------------\n";
 }
 
 void Course::showPrerequisites() const {
