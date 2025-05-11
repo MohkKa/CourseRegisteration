@@ -33,7 +33,7 @@ public:
 
     bool isStudentEligible(const string &id, const string &courseCode);
 
-    void updateCourse(const string &courseID, const Course &updatedCourse);
+    /*void updateCourse(const string &courseID, const Course &updatedCourse);*/
 
     void addStudent(const string &studentID, const Student &student);
 

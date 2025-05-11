@@ -130,6 +130,30 @@ bool System_Manager::isStudentEligible(const string &id, const string &courseCod
     return true;
 }
 
+/*
+bool checkPrerequisite(const Course &course) const {
+    std::vector<Course> prerequisites = course.getPrerequisites();
+
+    for (const Course &prereq: prerequisites) {
+        bool found = false;
+
+        for (const auto &completed: completedCourses) {
+            if (completed.course.getCourseID() == prereq.getCourseID()) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            return false;
+        }
+    }
+
+    return true;
+}
+*/
+
+
 void System_Manager::removeStudent(const string &studentID) {
     students.erase(studentID);
 }
@@ -138,13 +162,14 @@ void System_Manager::addCourse(const string &courseCode, const Course &course) {
     courses[courseCode] = course;
 }
 
-void System_Manager::updateCourse(const string &courseID, const Course &updatedCourse) {
+/*void System_Manager::updateCourse(const string &courseID, const Course &updatedCourse) {
     if (courses.contains(courseID)) {
         courses[courseID] = updatedCourse;
     } else {
         cout << "This course is not found " << '\n';
     }
-}
+
+}*/
 
 void System_Manager::addStudent(const string &studentID, const Student &student) {
     students[studentID] = student;
@@ -272,7 +297,7 @@ void System_Manager::writeCoursesToFile() {
                 << course.getInstructorName() << ","
                 << course.getInstructorEmail() << ",";
 
-        const auto &prereqs = course.getPrerequisites();
+        std::vector<Course> prereqs = course.getPrerequisites();
         for (size_t i = 0; i < prereqs.size(); ++i) {
             file << prereqs[i].getCourseID();
             if (i < prereqs.size() - 1) {

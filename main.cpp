@@ -281,9 +281,21 @@ void studentMenu(System_Manager &manager, Student &student) {
             case 2:
                 manager.showEligibleCourses(student.getId());
                 break;
-            case 3:
-                student.registerCourse();
+            case 3: {
+                /*student.registerCourse();*/
+                string courseid;
+                cout<<"enter course id";
+                cin>>courseid;
+                if (manager.isStudentEligible(student.getId(),courseid)) {
+                    cout<<"registered successfully";
+                }else {
+                    cout<<"you are not eligible for this course";
+                }
+                /*for (Course course:manager.courses[courseid].getPrerequisites()) {
+                    cout<<course.getCourseID()<<endl;
+                }*/
                 break;
+            }
             case 4: {
                 string courseID;
                 cout << "Enter course ID to drop: ";
