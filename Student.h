@@ -16,6 +16,8 @@ class Student {
     std::string email;
     std::string password = "123";
 
+    int warnings = 0;
+
     std::vector<CompletedCourse> completedCourses;
 
 public:
@@ -27,14 +29,15 @@ public:
 
     Student(const std::string &name, const std::string &id,
             const std::string &year, const std::string &email);
+
     Student(const std::string &name, const std::string &id,
-           const std::string &year, const std::string &email,const std::string &password);
+            const std::string &year, const std::string &email, const std::string &password);
 
     void viewGrade() const;
 
-    static double convertGradeToGPA(const std::string &grade);
+    double convertGradeToGPA(const std::string grade);
 
-    double calcGPA() const;
+    double calcGPA() ;
 
     void showAvailableCourses() const;
 
@@ -55,8 +58,10 @@ public:
 
     void dropCourse(const std::string &courseID);
 
-    void generateTranscript() const;
-    double totalCompletedCreditHours(Student s);
+    void generateTranscript() ;
+
+    static double totalCompletedCreditHours(Student s);
+
     std::vector<Course> getRegisteredCourses() const { return registeredCourses; }
     std::vector<Course> getAvailableCourses() const { return availableCourses; }
     std::vector<CompletedCourse> getCompletedCourses() const { return completedCourses; }
@@ -69,7 +74,7 @@ public:
         return this->year;
     }
 
-    std::string getID() {
+    std::string getID() const {
         return this->id;
     }
 };

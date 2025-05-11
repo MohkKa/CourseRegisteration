@@ -566,6 +566,15 @@ void Admin::addgrade(System_Manager &manager) {
     cout << "Enter course grade: ";
     cin >> grade;
 
+
+    if (manager.students[stud_id].convertGradeToGPA(grade) == -3) {
+        auto &courseToDrop = manager.students[stud_id].registeredCourses;
+        for (int i = 0; i < reg.size(); i++) {
+            if (reg[i].getCourseID() == course_id) courseToDrop.erase(courseToDrop.begin() + i);
+        }
+        cout << "Can't add course to completed cause of the grade and this course has been dropped "
+    }
+
     cout << "Enter course semester: ";
     cin >> semester;
 

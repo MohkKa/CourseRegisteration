@@ -3,7 +3,7 @@
 #include <iostream>
 
 Student::Student(const std::string &name, const std::string &id,
-           const std::string &year, const std::string &email) {
+                 const std::string &year, const std::string &email) {
     this->name = name;
     this->id = id;
     this->year = year;
@@ -11,24 +11,22 @@ Student::Student(const std::string &name, const std::string &id,
 }
 
 Student::Student(const std::string &name, const std::string &id,
-                 const std::string &year, const std::string &email,const std::string &password) {
+                 const std::string &year, const std::string &email, const std::string &password) {
     this->name = name;
     this->id = id;
     this->year = year;
     this->email = email;
-    this->password=password;
+    this->password = password;
 }
-double Student::totalCompletedCreditHours(Student s){
 
+double Student::totalCompletedCreditHours(Student s) {
     double totalHours = 0;
-    for (const auto& completedCourse : s.completedCourses) {
+    for (const auto &completedCourse: s.completedCourses) {
         totalHours += completedCourse.course.getCreditHour();
     }
     return totalHours;
-
-
-
 }
+
 void Student::addCompletedCourse(const CompletedCourse &course) {
     if (convertGradeToGPA(course.grade) == -1) {
         std::cerr << "Invalid grade: '" << course.grade << "'\n"; // ADD THIS LINE
@@ -70,7 +68,7 @@ void Student::viewGrade() const {
     }
 }
 
-double Student::convertGradeToGPA(const std::string &grade) {
+double Student::convertGradeToGPA(const std::string grade) {
     if (grade == "A+" || grade == "A") return 4.0;
     if (grade == "A-") return 3.8;
     if (grade == "B+") return 3.7;
@@ -82,11 +80,17 @@ double Student::convertGradeToGPA(const std::string &grade) {
     if (grade == "D+") return 1.8;
     if (grade == "D") return 1.5;
     if (grade == "D-") return 1.2;
-    if (grade == "F") return 0.0;
+    if (grade == "F") {
+        warnings++;
+        if (warnings == 6) cout << "Please go to Students Affair ,because you are about to get kicked out";
+        else
+            warnings++;
+        return -3;
+    }
     return -1; // Invalid grade
 }
 
-double Student::calcGPA() const {
+double Student::calcGPA()  {
     double totalGradePoints = 0;
     double totalCreditHours = 0;
 
@@ -231,8 +235,7 @@ void Student::dropCourse(const std::string &courseID) {
     }
 }
 
-
-void Student::generateTranscript() const {
+void Student::generateTranscript()  {
     std::cout << "\n=========== STUDENT TRANSCRIPT ===========\n";
     std::cout << " Name  : " << name << "\n";
     std::cout << " ID    : " << id << "\n";
