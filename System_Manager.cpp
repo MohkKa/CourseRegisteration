@@ -189,7 +189,7 @@ void System_Manager::showCompletedCourses(const string &studentId) {
 }
 
 void System_Manager::readAdminsFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
+    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -218,7 +218,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
+    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -235,7 +235,7 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
+    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
@@ -281,7 +281,7 @@ void System_Manager::readCoursesFromFile() {
 }
 
 void System_Manager::writeCoursesToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
+    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\courses.csv");
 
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for writing.\n";
@@ -311,7 +311,7 @@ void System_Manager::writeCoursesToFile() {
 }
 
 void System_Manager::readStudentsFromFile() {
-    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
+    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for reading.\n";
         return;
@@ -381,7 +381,7 @@ void System_Manager::readStudentsFromFile() {
 }
 
 void System_Manager::writeStudentsToFile() {
-    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
+    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for writing.\n";
         return;

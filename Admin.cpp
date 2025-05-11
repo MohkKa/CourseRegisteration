@@ -47,9 +47,9 @@ bool Admin::UniqueID(const string &ID, const char type, const System_Manager &ma
 }
 
 void Admin::addCourse(System_Manager &manager) {
-    cout << "Please Enter a Detailed course Description of the following :" << "\n";
+    cout << "Please enter a detailed course description of the following :" << "\n";
     cout << "1. Course id " << "\n" << "2. Title " << "\n" << "3.Syllabus" << "\n" << "4.Credit hours" << "\n" <<
-            "5.InstructorName" << "\n" << "6.Instructor Email " << "\n";
+            "5.Instructor Name" << "\n" << "6.Instructor Email " << "\n";
     string courseID, title, syllabus, instructorName, instructorEmail;
     int creditHour;
 
@@ -162,6 +162,7 @@ void Admin::addCourse(System_Manager &manager) {
         }
     }
 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     manager.courses.insert(make_pair(courseID, newCourse));
     addedCourses.push(courseID);
     cout << "The course was added successfully.\n";
@@ -482,6 +483,8 @@ void Admin::addPrereq(System_Manager &manager) {
         cout << c.getTitle() << ", ";
     }
     cout << '\n';
+
+    cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
 void Admin::removePrereq(System_Manager &manager) {
@@ -572,7 +575,7 @@ void Admin::addgrade(System_Manager &manager) {
         for (int i = 0; i < reg.size(); i++) {
             if (reg[i].getCourseID() == course_id) courseToDrop.erase(courseToDrop.begin() + i);
         }
-        cout << "Can't add course to completed cause of the grade and this course has been dropped "
+        cout << "Can't add course to completed cause of the grade and this course has been dropped ";
     }
 
     cout << "Enter course semester: ";
