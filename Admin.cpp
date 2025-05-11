@@ -54,7 +54,7 @@ void Admin::addCourse(System_Manager &manager) {
     int creditHour;
 
     cout << "Enter unique course ID:";
-    getline(cin,  courseID);
+    getline(cin, courseID);
 
     while (!UniqueID(courseID, 'C', manager)) {
         cout << "This ID is already taken. Please Try Again: ";
@@ -76,7 +76,7 @@ void Admin::addCourse(System_Manager &manager) {
 
     while (true) {
         try {
-    cout << "Enter syllabus:";
+            cout << "Enter syllabus:";
             getline(cin, syllabus);
             /*if (syllabus.empty()) {
                 throw runtime_error("Input cannot be empty");
@@ -104,26 +104,26 @@ void Admin::addCourse(System_Manager &manager) {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (true) {
         try {
-    cout << "Enter instructor name:";
+            cout << "Enter instructor name:";
             getline(cin, instructorName);
             if (instructorName.empty()) {
                 /*throw runtime_error("Input cannot be empty");*/
             }
             break;
-        } catch (const runtime_error& e) {
+        } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
         }
     }
 
     while (true) {
         try {
-    cout << "Enter instructor email: ";
+            cout << "Enter instructor email: ";
             getline(cin, instructorEmail);
             if (instructorEmail.empty()) {
                 /*throw runtime_error("Input cannot be empty");*/
             }
             break;
-        } catch (const runtime_error& e) {
+        } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
         }
     }
@@ -156,8 +156,7 @@ void Admin::addCourse(System_Manager &manager) {
             newCourse.addPrerequisite(manager.courses[prereqID], manager);
             cout << "Prerequisite added: " << prereqID << endl;
             cout << "Add another prerequisite or 'done' to finish: ";
-
-        } catch (const runtime_error& e) {
+        } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
             cout << "Add prerequisites (course ID, 'done' to finish): ";
         }
@@ -183,7 +182,7 @@ void Admin::updateCourse(System_Manager &manager) {
                 throw runtime_error("Course not found");
             }
             break;
-        } catch (const runtime_error& e) {
+        } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
         }
     }
@@ -196,9 +195,9 @@ void Admin::updateCourse(System_Manager &manager) {
     while (true) {
         try {
             cout << "What would you like to update:\n"
-                 << "[1] courseID\n[2] title\n[3] syllabus\n"
-                 << "[4] credit hour\n[5] instructor Name\n[6] instructor Email\n"
-                 << "Enter choice: ";
+                    << "[1] courseID\n[2] title\n[3] syllabus\n"
+                    << "[4] credit hour\n[5] instructor Name\n[6] instructor Email\n"
+                    << "Enter choice: ";
 
             if (!(cin >> choice) || choice < 1 || choice > 6) {
                 cin.clear();
@@ -206,7 +205,7 @@ void Admin::updateCourse(System_Manager &manager) {
                 throw runtime_error("Invalid choice (1-6 only)");
             }
             break;
-        } catch (const runtime_error& e) {
+        } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << "\n";
         }
     }
@@ -229,7 +228,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     courseToUpdate.setCourseID(newID);
                     cout << "Course ID updated successfully.\n";
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -246,7 +245,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     }
                     courseToUpdate.setTitle(newTitle);
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -263,7 +262,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     }
                     courseToUpdate.setSyllabus(newSyllabus);
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -284,7 +283,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     }
                     courseToUpdate.setCreditHour(newCreditHour);
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -301,7 +300,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     }
                     courseToUpdate.setInstructorName(newInstName);
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -318,7 +317,7 @@ void Admin::updateCourse(System_Manager &manager) {
                     }
                     courseToUpdate.setInstructorEmail(newInstEmail);
                     break;
-                } catch (const runtime_error& e) {
+                } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
             }
@@ -356,7 +355,7 @@ void Admin::removeCourse(System_Manager &manager) {
     }
 
     char confirm;
-    for (const string &id : courseIDs) {
+    for (const string &id: courseIDs) {
         while (true) {
             try {
                 cout << "Are you sure you want to delete course " << id << "? (y/n): ";
@@ -432,7 +431,7 @@ void Admin::addPrereq(System_Manager &manager) {
 
     if (!up_course.getPrerequisites().empty()) {
         cout << "Current prerequisites: ";
-        for (const Course &c : up_course.getPrerequisites()) {
+        for (const Course &c: up_course.getPrerequisites()) {
             cout << c.getTitle() << ", ";
         }
     }
@@ -479,7 +478,7 @@ void Admin::addPrereq(System_Manager &manager) {
     }
 
     cout << "Updated prerequisites list: ";
-    for (const Course &c : up_course.getPrerequisites()) {
+    for (const Course &c: up_course.getPrerequisites()) {
         cout << c.getTitle() << ", ";
     }
     cout << '\n';
@@ -551,6 +550,19 @@ void Admin::addgrade(System_Manager &manager) {
         cin >> course_id;
     }
 
+    auto &reg = manager.students[stud_id].registeredCourses;
+
+    bool found = false;
+    int index;
+    for (int i = 0; i < reg.size(); i++) {
+        if (reg[i].getCourseID() == course_id) found = true, index = i;
+    }
+
+    if (!found) {
+        cout << "Course ID not found";
+        return;
+    }
+
     cout << "Enter course grade: ";
     cin >> grade;
 
@@ -561,15 +573,20 @@ void Admin::addgrade(System_Manager &manager) {
     const Course &course = manager.getCourse(course_id);
     const CompletedCourse completed_course = {course, semester, grade};
     student.addCompletedCourse(completed_course);
+    reg.erase(reg.begin() + index);
+
+    auto &av = student.availableCourses;
 
     // Remove from available courses
-    /*auto &available = student.availableCourses;
-    available.erase(remove_if(available.begin(), available.end(),
-                              [&](const Course &c) { return c.getCourseID() == course_id; }),
-                    available.end());*/
+    for (int i = 0; i < av.size(); ++i) {
+        if (av[i].getCourseID() == course_id) {
+            av.erase(av.begin() + i);
+            break;
+        }
+    }
 
     cout << "Student grades:\n";
-    for (const CompletedCourse &c : student.getCompletedCourses()) {
+    for (const CompletedCourse &c: student.getCompletedCourses()) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
 }
@@ -593,7 +610,7 @@ void Admin::updategrade(System_Manager &manager) {
     }
 
     cout << "Student grades:\n";
-    for (const CompletedCourse &c : courses) {
+    for (const CompletedCourse &c: courses) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
 
@@ -601,7 +618,7 @@ void Admin::updategrade(System_Manager &manager) {
     cin >> course_id;
 
     bool found = false;
-    for (CompletedCourse &c : courses) {
+    for (CompletedCourse &c: courses) {
         if (c.course.getCourseID() == course_id) {
             cout << "Enter new grade: ";
             cin >> new_grade;
@@ -617,7 +634,7 @@ void Admin::updategrade(System_Manager &manager) {
     }
 
     cout << "Updated student grades:\n";
-    for (const CompletedCourse &c : courses) {
+    for (const CompletedCourse &c: courses) {
         cout << c.course.getCourseID() << ": " << c.semester << ", " << c.grade << "\n";
     }
 }
@@ -664,14 +681,13 @@ void Admin::addStudent(System_Manager &manager) {
     manager.addStudent(id, new_student);
 
     cout << "Student details: \n"
-         << "Name: " << new_student.getName() << "\n"
-         << "ID: " << new_student.getId() << "\n"
-         << "Year : " << new_student.getYear() << "\n"
-         << "E-mail: " << new_student.getEmail();
+            << "Name: " << new_student.getName() << "\n"
+            << "ID: " << new_student.getId() << "\n"
+            << "Year : " << new_student.getYear() << "\n"
+            << "E-mail: " << new_student.getEmail();
 }
-void  Admin :: addAdmin (System_Manager & manager ){
 
-
+void Admin::addAdmin(System_Manager &manager) {
     string name, id, email, password;
     cout << "Enter Admin name: " << "\n";
     getline(cin, name);
@@ -682,13 +698,12 @@ void  Admin :: addAdmin (System_Manager & manager ){
     cout << "Enter Admin password: " << "\n";
     cin >> password;
 
-    Admin new_admin (id , name , email , password );
-    manager.admins.insert(make_pair(id , new_admin));
+    Admin new_admin(id, name, email, password);
+    manager.admins.insert(make_pair(id, new_admin));
 
     cout << "Admin details: " << "\n"
             << "ID: " << id << "\n"
             << "Name: " << name << "\n"
             << "Email : " << email << "\n"
-            << "Password: " << password ;
-
+            << "Password: " << password;
 }

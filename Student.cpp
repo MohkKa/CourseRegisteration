@@ -31,6 +31,7 @@ double Student::totalCompletedCreditHours(Student s){
 }
 void Student::addCompletedCourse(const CompletedCourse &course) {
     if (convertGradeToGPA(course.grade) == -1) {
+        std::cerr << "Invalid grade: '" << course.grade << "'\n"; // ADD THIS LINE
         throw std::invalid_argument("Invalid grade provided for completed course");
     }
     completedCourses.push_back(course);

@@ -23,7 +23,7 @@ public:
 
     void removeCourse(const string &courseCode);
 
-    void editAdminPass(const string &username, const string &password);
+    void editAdminPass(const string &id, const string &password);
 
     void editStudentPass(const string &id, const string &password);
 

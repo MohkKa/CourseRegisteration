@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Dell/CourseRegisteration
+# Install script for directory: C:/Users/mohamed/OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)/Desktop/CourseRegisteration
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 # Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "D:/Clion/CLion 2024.3.5/bin/mingw/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Users/mohamed/AppData/Local/Programs/CLion/bin/mingw/bin/objdump.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/Dell/CourseRegisteration/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/Users/mohamed/OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)/Desktop/CourseRegisteration/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

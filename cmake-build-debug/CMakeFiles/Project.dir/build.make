@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Clion\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = C:\Users\mohamed\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe
 
 # The command to remove a file.
-RM = "D:\Clion\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = C:\Users\mohamed\AppData\Local\Programs\CLion\bin\cmake\win\x64\bin\cmake.exe -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\Users\Dell\CourseRegisteration
+CMAKE_SOURCE_DIR = "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = C:\Users\Dell\CourseRegisteration\cmake-build-debug
+CMAKE_BINARY_DIR = "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Project.dir/depend.make
@@ -69,74 +69,74 @@ include CMakeFiles/Project.dir/progress.make
 include CMakeFiles/Project.dir/flags.make
 
 CMakeFiles/Project.dir/main.cpp.obj: CMakeFiles/Project.dir/flags.make
-CMakeFiles/Project.dir/main.cpp.obj: C:/Users/Dell/CourseRegisteration/main.cpp
+CMakeFiles/Project.dir/main.cpp.obj: C:/Users/mohamed/OneDrive\ -\ Faculty\ of\ Computer\ and\ Information\ Sciences\ (Ain\ Shams\ University)/Desktop/CourseRegisteration/main.cpp
 CMakeFiles/Project.dir/main.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Project.dir/main.cpp.obj"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/main.cpp.obj -MF CMakeFiles\Project.dir\main.cpp.obj.d -o CMakeFiles\Project.dir\main.cpp.obj -c C:\Users\Dell\CourseRegisteration\main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Project.dir/main.cpp.obj"
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/main.cpp.obj -MF CMakeFiles\Project.dir\main.cpp.obj.d -o CMakeFiles\Project.dir\main.cpp.obj -c "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\main.cpp"
 
 CMakeFiles/Project.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Project.dir/main.cpp.i"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dell\CourseRegisteration\main.cpp > CMakeFiles\Project.dir\main.cpp.i
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\main.cpp" > CMakeFiles\Project.dir\main.cpp.i
 
 CMakeFiles/Project.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Project.dir/main.cpp.s"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Dell\CourseRegisteration\main.cpp -o CMakeFiles\Project.dir\main.cpp.s
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\main.cpp" -o CMakeFiles\Project.dir\main.cpp.s
 
 CMakeFiles/Project.dir/Admin.cpp.obj: CMakeFiles/Project.dir/flags.make
-CMakeFiles/Project.dir/Admin.cpp.obj: C:/Users/Dell/CourseRegisteration/Admin.cpp
+CMakeFiles/Project.dir/Admin.cpp.obj: C:/Users/mohamed/OneDrive\ -\ Faculty\ of\ Computer\ and\ Information\ Sciences\ (Ain\ Shams\ University)/Desktop/CourseRegisteration/Admin.cpp
 CMakeFiles/Project.dir/Admin.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Project.dir/Admin.cpp.obj"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Admin.cpp.obj -MF CMakeFiles\Project.dir\Admin.cpp.obj.d -o CMakeFiles\Project.dir\Admin.cpp.obj -c C:\Users\Dell\CourseRegisteration\Admin.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Project.dir/Admin.cpp.obj"
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Admin.cpp.obj -MF CMakeFiles\Project.dir\Admin.cpp.obj.d -o CMakeFiles\Project.dir\Admin.cpp.obj -c "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Admin.cpp"
 
 CMakeFiles/Project.dir/Admin.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Project.dir/Admin.cpp.i"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dell\CourseRegisteration\Admin.cpp > CMakeFiles\Project.dir\Admin.cpp.i
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Admin.cpp" > CMakeFiles\Project.dir\Admin.cpp.i
 
 CMakeFiles/Project.dir/Admin.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Project.dir/Admin.cpp.s"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Dell\CourseRegisteration\Admin.cpp -o CMakeFiles\Project.dir\Admin.cpp.s
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Admin.cpp" -o CMakeFiles\Project.dir\Admin.cpp.s
 
 CMakeFiles/Project.dir/Course.cpp.obj: CMakeFiles/Project.dir/flags.make
-CMakeFiles/Project.dir/Course.cpp.obj: C:/Users/Dell/CourseRegisteration/Course.cpp
+CMakeFiles/Project.dir/Course.cpp.obj: C:/Users/mohamed/OneDrive\ -\ Faculty\ of\ Computer\ and\ Information\ Sciences\ (Ain\ Shams\ University)/Desktop/CourseRegisteration/Course.cpp
 CMakeFiles/Project.dir/Course.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Project.dir/Course.cpp.obj"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Course.cpp.obj -MF CMakeFiles\Project.dir\Course.cpp.obj.d -o CMakeFiles\Project.dir\Course.cpp.obj -c C:\Users\Dell\CourseRegisteration\Course.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Project.dir/Course.cpp.obj"
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Course.cpp.obj -MF CMakeFiles\Project.dir\Course.cpp.obj.d -o CMakeFiles\Project.dir\Course.cpp.obj -c "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Course.cpp"
 
 CMakeFiles/Project.dir/Course.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Project.dir/Course.cpp.i"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dell\CourseRegisteration\Course.cpp > CMakeFiles\Project.dir\Course.cpp.i
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Course.cpp" > CMakeFiles\Project.dir\Course.cpp.i
 
 CMakeFiles/Project.dir/Course.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Project.dir/Course.cpp.s"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Dell\CourseRegisteration\Course.cpp -o CMakeFiles\Project.dir\Course.cpp.s
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Course.cpp" -o CMakeFiles\Project.dir\Course.cpp.s
 
 CMakeFiles/Project.dir/Student.cpp.obj: CMakeFiles/Project.dir/flags.make
-CMakeFiles/Project.dir/Student.cpp.obj: C:/Users/Dell/CourseRegisteration/Student.cpp
+CMakeFiles/Project.dir/Student.cpp.obj: C:/Users/mohamed/OneDrive\ -\ Faculty\ of\ Computer\ and\ Information\ Sciences\ (Ain\ Shams\ University)/Desktop/CourseRegisteration/Student.cpp
 CMakeFiles/Project.dir/Student.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Project.dir/Student.cpp.obj"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Student.cpp.obj -MF CMakeFiles\Project.dir\Student.cpp.obj.d -o CMakeFiles\Project.dir\Student.cpp.obj -c C:\Users\Dell\CourseRegisteration\Student.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Project.dir/Student.cpp.obj"
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/Student.cpp.obj -MF CMakeFiles\Project.dir\Student.cpp.obj.d -o CMakeFiles\Project.dir\Student.cpp.obj -c "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Student.cpp"
 
 CMakeFiles/Project.dir/Student.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Project.dir/Student.cpp.i"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dell\CourseRegisteration\Student.cpp > CMakeFiles\Project.dir\Student.cpp.i
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Student.cpp" > CMakeFiles\Project.dir\Student.cpp.i
 
 CMakeFiles/Project.dir/Student.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Project.dir/Student.cpp.s"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Dell\CourseRegisteration\Student.cpp -o CMakeFiles\Project.dir\Student.cpp.s
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\Student.cpp" -o CMakeFiles\Project.dir\Student.cpp.s
 
 CMakeFiles/Project.dir/System_Manager.cpp.obj: CMakeFiles/Project.dir/flags.make
-CMakeFiles/Project.dir/System_Manager.cpp.obj: C:/Users/Dell/CourseRegisteration/System_Manager.cpp
+CMakeFiles/Project.dir/System_Manager.cpp.obj: C:/Users/mohamed/OneDrive\ -\ Faculty\ of\ Computer\ and\ Information\ Sciences\ (Ain\ Shams\ University)/Desktop/CourseRegisteration/System_Manager.cpp
 CMakeFiles/Project.dir/System_Manager.cpp.obj: CMakeFiles/Project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Project.dir/System_Manager.cpp.obj"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/System_Manager.cpp.obj -MF CMakeFiles\Project.dir\System_Manager.cpp.obj.d -o CMakeFiles\Project.dir\System_Manager.cpp.obj -c C:\Users\Dell\CourseRegisteration\System_Manager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Project.dir/System_Manager.cpp.obj"
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Project.dir/System_Manager.cpp.obj -MF CMakeFiles\Project.dir\System_Manager.cpp.obj.d -o CMakeFiles\Project.dir\System_Manager.cpp.obj -c "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\System_Manager.cpp"
 
 CMakeFiles/Project.dir/System_Manager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Project.dir/System_Manager.cpp.i"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Dell\CourseRegisteration\System_Manager.cpp > CMakeFiles\Project.dir\System_Manager.cpp.i
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\System_Manager.cpp" > CMakeFiles\Project.dir\System_Manager.cpp.i
 
 CMakeFiles/Project.dir/System_Manager.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Project.dir/System_Manager.cpp.s"
-	"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Dell\CourseRegisteration\System_Manager.cpp -o CMakeFiles\Project.dir\System_Manager.cpp.s
+	C:\Users\mohamed\AppData\Local\Programs\CLion\bin\mingw\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\System_Manager.cpp" -o CMakeFiles\Project.dir\System_Manager.cpp.s
 
 # Object files for target Project
 Project_OBJECTS = \
@@ -158,7 +158,7 @@ Project.exe: CMakeFiles/Project.dir/build.make
 Project.exe: CMakeFiles/Project.dir/linkLibs.rsp
 Project.exe: CMakeFiles/Project.dir/objects1.rsp
 Project.exe: CMakeFiles/Project.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Project.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Project.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Project.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -170,6 +170,6 @@ CMakeFiles/Project.dir/clean:
 .PHONY : CMakeFiles/Project.dir/clean
 
 CMakeFiles/Project.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" C:\Users\Dell\CourseRegisteration C:\Users\Dell\CourseRegisteration C:\Users\Dell\CourseRegisteration\cmake-build-debug C:\Users\Dell\CourseRegisteration\cmake-build-debug C:\Users\Dell\CourseRegisteration\cmake-build-debug\CMakeFiles\Project.dir\DependInfo.cmake "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration" "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration" "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug" "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug" "C:\Users\mohamed\OneDrive - Faculty of Computer and Information Sciences (Ain Shams University)\Desktop\CourseRegisteration\cmake-build-debug\CMakeFiles\Project.dir\DependInfo.cmake" "--color=$(COLOR)"
 .PHONY : CMakeFiles/Project.dir/depend
 

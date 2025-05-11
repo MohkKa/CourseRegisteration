@@ -44,11 +44,6 @@ public:
 
     void setPassword(const string &password);
 
-
-    void  setUsername( const string &username );
-
-    void  addAdmin (System_Manager &manager );
-
     string getUsername();
 
     string getPassword();
@@ -60,6 +55,8 @@ public:
     string getName() {
         return this->name;
     }
+
+    void addAdmin(System_Manager &manager);
 };
 
 
