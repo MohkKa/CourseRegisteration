@@ -164,7 +164,7 @@ void System_Manager::showCompletedCourses(const string &studentId) {
 }
 
 void System_Manager::readAdminsFromFile() {
-    std::ifstream file("N:\\Data\\admins.csv");
+    std::ifstream file("\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -193,7 +193,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    std::ofstream file("N:\\Data\\admins.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -210,7 +210,7 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("N:\\Data\\courses.csv");
+    std::ifstream file("Data\\courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
