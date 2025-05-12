@@ -275,9 +275,8 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                         manager.editAdminPass(admin.getId(), newPass);
                         cout << "Password updated successfully.\n";
                         break;
-                    } else {
-                        cout << "Passwords do not match. Please try again.\n";
                     }
+                    cout << "Passwords do not match. Please try again.\n";
                 }
                 break;
             }
@@ -348,19 +347,23 @@ void studentMenu(System_Manager &manager, Student &student) {
             cout << "Enter choice: ";
             getline(cin, input);
 
+            if (input.empty()) {
+                cout << "Input cannot be empty. Please enter a number." << endl;
+                attempts++;
+                continue;
+            }
+
             if (isValidInteger(input)) {
                 try {
                     choice = stoi(input);
                     validInput = true;
                     break;
                 } catch (...) {
-                    cout << "Conversion error. Try again...." << endl;
+                    cout << "Conversion error. Try again..." << endl;
                     attempts++;
                 }
             } else {
-                if (attempts < 2) {
-                    cout << "Invalid input. Please enter a valid integer (digits only)." << endl;
-                }
+                cout << "Invalid input. Please enter a valid integer (digits only)." << endl;
                 attempts++;
             }
         }
@@ -379,14 +382,22 @@ void studentMenu(System_Manager &manager, Student &student) {
                 break;
             case 3: {
                 /*student.registerCourse();*/
+
                 string courseid;
-                cout<<"enter course id";
-                cin>>courseid;
-                if (manager.isStudentEligible(student.getId(),courseid)) {
-                    cout<<"registered successfully";
-                }else {
-                    cout<<"you are not eligible for this course";
+                while (true) {
+                    cout << "Enter course ID: ";
+                    getline(cin, courseid);
+
+                    if (!courseid.empty()) break;
+                    cout << "Course ID cannot be empty. Please try again.\n";
                 }
+
+                if (manager.isStudentEligible(student.getId(), courseid)) {
+                    cout << "Registered successfully";
+                } else {
+                    cout << "You are not eligible for this course";
+                }
+
                 /*for (Course course:manager.courses[courseid].getPrerequisites()) {
                     cout<<course.getCourseID()<<endl;
                 }*/
@@ -394,8 +405,13 @@ void studentMenu(System_Manager &manager, Student &student) {
             }
             case 4: {
                 string courseID;
-                cout << "Enter course ID to drop: ";
-                getline(cin, courseID);
+                while (true) {
+                    cout << "Enter course ID to drop: ";
+                    getline(cin, courseID);
+
+                    if (!courseID.empty()) break;
+                    cout << "Course ID cannot be empty. Please try again.\n";
+                }
                 student.dropCourse(courseID);
                 break;
             }
@@ -407,15 +423,29 @@ void studentMenu(System_Manager &manager, Student &student) {
                 break;
             case 7: {
                 string newPass, confirmPass;
-                cout << "Enter new password: ";
-                getline(cin, newPass);
-                cout << "Confirm password: ";
-                getline(cin, confirmPass);
-                if (newPass == confirmPass) {
-                    manager.editStudentPass(student.getId(), newPass);
-                } else {
-                    cout << "Passwords do not match." << endl;
+                while (true) {
+                    cout << "Enter new password: ";
+                    getline(cin, newPass);
+                    if (newPass.empty()) {
+                        cout << "Password cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    cout << "Confirm password: ";
+                    getline(cin, confirmPass);
+                    if (confirmPass.empty()) {
+                        cout << "Confirmation cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    if (newPass == confirmPass) {
+                        manager.editStudentPass(student.getId(), newPass);
+                        break;
+                    }
+
+                    cout << "Passwords do not match. Please try again.\n";
                 }
+
                 break;
             }
             case 8:

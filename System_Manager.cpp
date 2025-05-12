@@ -16,7 +16,13 @@ void System_Manager::editAdminPass(const string &id, const string &password) {
 
         string oldPassword;
         cout << "Enter your old password:" << endl;
-        cin >> oldPassword;
+        getline(cin, oldPassword);
+
+        if (oldPassword.empty()) {
+            cout << "Password cannot be empty. Try again." << endl;
+            i++; // empty inputs are not counted as an attempt
+            continue;
+        }
 
         if (admins[id].getPassword() == oldPassword) {
             admins[id].setPassword(password);
@@ -36,12 +42,19 @@ void System_Manager::editStudentPass(const string &id, const string &password) {
             cout << "This ID does not exist." << endl;
             return;
         }
+
         string oldPassword;
         cout << "Enter your old password:" << endl;
-        cin >> oldPassword;
+        getline(cin, oldPassword);
+        if (oldPassword.empty()) {
+            cout << "Password cannot be empty. Try again." << endl;
+            i++;
+            continue;
+        }
+
         if (students[id].getPassword() == oldPassword) {
             students[id].setPassword(password);
-            cout << "Password successfully changed.";
+            cout << "Password successfully changed." << endl;
             return;
         }
         cout << "Password is incorrect." << endl;
