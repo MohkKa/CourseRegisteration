@@ -131,6 +131,12 @@ void adminMenu(System_Manager &manager, Admin &admin) {
             cout << "Enter choice: ";
             getline(cin, input);
 
+            if (input.empty()) {
+                cout << "Input cannot be empty. Please enter a number." << endl;
+                attempts++;
+                continue;
+            }
+
             if (isValidInteger(input)) {
                 try {
                     choice = stoi(input);
@@ -174,54 +180,129 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 break;
             case 7: {
                 int gradeChoice;
-                cout << "1. Add Grade\n2. Update Grade\nChoice: ";
-                cin >> gradeChoice;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                if (gradeChoice == 1) {
-                    admin.addgrade(manager);
-                } else if (gradeChoice == 2) {
-                    admin.updategrade(manager);
+                string input;
+
+                while (true) {
+                    cout << "1. Add Grade\n2. Update Grade\nChoice: ";
+                    getline(cin, input);
+
+                    if (input.empty()) {
+                        cout << "Input cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    try {
+                        gradeChoice = stoi(input);
+                        if (gradeChoice == 1) {
+                            admin.addgrade(manager);
+                            break;
+                        } else if (gradeChoice == 2) {
+                            admin.updategrade(manager);
+                            break;
+                        } else {
+                            cout << "Invalid choice. Please enter 1 or 2.\n";
+                        }
+                    } catch (...) {
+                        cout << "Invalid input. Please enter digits only.\n";
+                    }
                 }
                 break;
             }
             case 8: {
                 int prereqChoice;
-                cout << "1. Add Prerequisite\n2. Remove Prerequisite\nChoice: ";
-                cin >> prereqChoice;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                if (prereqChoice == 1) {
-                    admin.addPrereq(manager);
-                } else if (prereqChoice == 2) {
-                    admin.removePrereq(manager);
+                string input;
+
+                while (true) {
+                    cout << "1. Add Prerequisite\n2. Remove Prerequisite\nChoice: ";
+                    getline(cin, input);
+
+                    if (input.empty()) {
+                        cout << "Input cannot be empty. Please enter 1 or 2.\n";
+                        continue;
+                    }
+
+                    bool valid = true;
+                    for (char ch : input) {
+                        if (!isdigit(ch)) {
+                            valid = false;
+                            break;
+                        }
+                    }
+
+                    if (!valid) {
+                        cout << "Invalid input. Please enter digits only.\n";
+                        continue;
+                    }
+
+                    try {
+                        prereqChoice = stoi(input);
+                        if (prereqChoice == 1) {
+                            admin.addPrereq(manager);
+                        } else if (prereqChoice == 2) {
+                            admin.removePrereq(manager);
+                        } else {
+                            cout << "Invalid choice. Please enter 1 or 2.\n";
+                            continue;
+                        }
+                        break;
+                    } catch (...) {
+                        cout << "Conversion error. Please try again.\n";
+                    }
                 }
+
                 break;
             }
             case 9: {
+
                 string newPass, confirmPass;
-                cout << "Enter new password: ";
-                getline(cin, newPass);
-                cout << "Confirm password: ";
-                getline(cin, confirmPass);
-                if (newPass == confirmPass) {
-                    manager.editAdminPass(admin.getId(), newPass);
-                } else {
-                    cout << "Passwords do not match." << endl;
+
+                while (true) {
+                    cout << "Enter new password: ";
+                    getline(cin, newPass);
+                    if (newPass.empty()) {
+                        cout << "Password cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    cout << "Confirm password: ";
+                    getline(cin, confirmPass);
+                    if (confirmPass.empty()) {
+                        cout << "Confirmation cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    if (newPass == confirmPass) {
+                        manager.editAdminPass(admin.getId(), newPass);
+                        cout << "Password updated successfully.\n";
+                        break;
+                    } else {
+                        cout << "Passwords do not match. Please try again.\n";
+                    }
                 }
                 break;
             }
             case 10:{
-                string  id;
-                cout<<"enter course id";
-                cin>>id;
-                if (manager.courses.find(id) != manager.courses.end()) {
-                    Course course = manager.getCourse(id);
-                    Course pre_update = course.undoupdate(course);
-                    course.displayAfterUndo(pre_update);
-                } else
-                {
-                    cout << "Course not found!" << endl;
+                string id;
+                while (true) {
+                    cout << "Enter course ID: ";
+                    getline(cin, id);
+
+                    if (id.empty()) {
+                        cout << "Course ID cannot be empty. Please try again.\n";
+                        continue;
+                    }
+
+                    if (manager.courses.find(id) != manager.courses.end()) {
+                        Course course = manager.getCourse(id);
+                        Course pre_update = course.undoupdate(course);
+                        course.displayAfterUndo(pre_update);
+                        break;
+                    } else {
+                        cout << "Course not found! Please try again.\n";
+                    }
                 }
 
+                break;
             }
             case 11:
                 return;
