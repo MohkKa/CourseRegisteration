@@ -383,7 +383,8 @@ void Admin::updateCourse(System_Manager &manager) {
         }
         case 4: {
             int newCreditHour;
-            while (true) {
+
+            /* while (true) {
                 try {
                     cout << "Enter new credit hours: ";
                     if (!(cin >> newCreditHour)) {
@@ -399,7 +400,31 @@ void Admin::updateCourse(System_Manager &manager) {
                 } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
+            } */
+
+            while (true) {
+                try {
+                    cout << "Enter new credit hours: ";
+                    string inputt;
+                    getline(cin, inputt);
+
+                    newCreditHour = stoi(inputt);
+
+                    if (newCreditHour <= 0) {
+                        throw runtime_error("Must be positive");
+                    }
+
+                    courseToUpdate.setCreditHour(newCreditHour);
+                    break;
+                } catch (const invalid_argument&) {
+                    cout << "Error: Invalid number\n";
+                } catch (const out_of_range&) {
+                    cout << "Error: Number is out of range\n";
+                } catch (const runtime_error& e) {
+                    cout << "Error: " << e.what() << "\n";
+                }
             }
+
             break;
         }
         case 5: {
