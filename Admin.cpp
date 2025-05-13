@@ -277,26 +277,31 @@ void Admin::updateCourse(System_Manager &manager) {
 
     Course &courseToUpdate = manager.getCourse(courseID);
 
+    string input;
     int choice;
     courseToUpdate.Backupdata(courseToUpdate);
+
     while (true) {
-        try {
-            cout << "What would you like to update:\n"
+        cout << "What would you like to update:\n"
                     << "[1] courseID\n[2] title\n[3] syllabus\n"
                     << "[4] credit hour\n[5] instructor Name\n[6] instructor Email\n"
                     << "Enter choice: ";
+        getline(cin, input);
 
-            if (!(cin >> choice) || choice < 1 || choice > 6) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                throw runtime_error("Invalid choice (1-6 only)");
-            }
+        if (input.empty()) {
+            cout << "Choice cannot be empty. Try again.\n";
+            continue;
+        }
+
+        try {
+            choice = stoi(input);
+            if (choice < 1 || choice > 6)
+                throw runtime_error("Invalid range (1-6 only)");
             break;
-        } catch (const runtime_error &e) {
-            cout << "Error: " << e.what() << "\n";
+        } catch (...) {
+            cout << "Invalid input. Enter a number between 1 and 6.\n";
         }
     }
-    cin.ignore(); // Clear newline
 
     switch (choice) {
         case 1: {
@@ -981,8 +986,9 @@ void Admin::addAdmin(System_Manager &manager) {
         cout << "Name cannot be empty. Please try again.\n";
     }
 
-    cin.clear();
-    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // .ignore is not needed
+    /* cin.clear();
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); */
 
     while (true) {
         cout << "Enter Admin id: ";

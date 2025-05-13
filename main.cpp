@@ -47,6 +47,11 @@ void loginScreen(System_Manager &manager) {
             string input;
             cout << "Enter choice: ";
             getline(cin, input);
+            if (input.empty()) {
+                cout << "Input cannot be empty. Try again." << endl;
+                attempts++;
+                continue;
+            }
 
             if (isValidInteger(input)) {
                 try {
@@ -80,21 +85,35 @@ void loginScreen(System_Manager &manager) {
         }
         if (choice == 1 || choice == 2) {
             string username, password;
-            cout << "Username: ";
-            getline(cin, username);
-            cout << "Password: ";
-            getline(cin, password);
+
+            while (true) {
+                cout << "Username: ";
+                getline(cin, username);
+                if (username.empty()) {
+                    cout << "Username cannot be empty. Try again." << endl;
+                } else
+                    break;
+            }
+
+            while (true) {
+                cout << "Password: ";
+                getline(cin, password);
+                if (password.empty()) {
+                    cout << "Password cannot be empty. Try again." << endl;
+                } else
+                    break;
+            }
 
             if (choice == 1) {
                 if (manager.admins.contains(username) &&
-                    manager.admins[username].getPassword() == password) {
+                manager.admins[username].getPassword() == password) {
                     adminMenu(manager, manager.admins[username]);
                 } else {
                     cout << "Invalid admin credentials!" << endl;
                 }
-            } else if (choice == 2) {
+            } else {
                 if (manager.students.contains(username) &&
-                    manager.students[username].getPassword() == password) {
+                manager.students[username].getPassword() == password) {
                     studentMenu(manager, manager.students[username]);
                 } else {
                     cout << "Invalid student credentials!" << endl;
