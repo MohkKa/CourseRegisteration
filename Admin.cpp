@@ -710,13 +710,6 @@ void Admin::addPrereq(System_Manager &manager) {
 
 void Admin::removePrereq(System_Manager &manager) {
     string courseID;
-    // cout << "Enter course id: ";
-    // cin >> courseID;
-    //
-    // while (!manager.courses.contains(courseID)) {
-    //     cout << "Course ID not found. Please try again: ";
-    //     cin >> courseID;
-    // }
 
     while (true) {
         cout << "Enter course ID: ";
@@ -761,16 +754,15 @@ void Admin::removePrereq(System_Manager &manager) {
         break;
     }
 
-    bool found = false;
-    for (int i = 0; i < prereq_list.size(); i++) {
+    /* for (int i = 0; i < prereq_list.size(); i++) {
         if (prereq_list[i].getTitle() == courseTitle) {
             prereq_list.erase(prereq_list.begin() + i);
             found = true;
             break;
         }
-    }
+    } */
 
-    if (!found) {
+    /* if (!found) {
         cout << "Course title not found in prerequisites.\n";
     } else {
         cout << "Updated prerequisites list: ";
@@ -778,7 +770,37 @@ void Admin::removePrereq(System_Manager &manager) {
             cout << c.getTitle() << ", ";
         }
         cout << endl;
+    } */
+
+    vector<Course> updated_list;
+    bool found = false;
+    for (const Course &c : prereq_list) {
+        if (c.getTitle() == courseTitle) {
+            found = true;
+            continue;
+        }
+        updated_list.push_back(c);
     }
+
+    if (!found) {
+        cout << "Course title not found in prerequisites.\n";
+        return;
+    }
+
+    Course temp = up_course;
+    temp.clearPrerequisites();
+    up_course = temp;
+
+    // re-adding filtered courses
+    for (const Course &c : updated_list) {
+        up_course.addPrerequisite(c, manager);
+    }
+
+    cout << "Updated prerequisites list: ";
+    for (const Course &c : up_course.getPrerequisites()) {
+        cout << c.getTitle() << ", ";
+    }
+    cout << endl;
 }
 
 void Admin::addgrade(System_Manager &manager) {
