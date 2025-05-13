@@ -62,6 +62,35 @@ void System_Manager::editStudentPass(const string &id, const string &password) {
 
     cout << "Too many tries, try again later." << endl;
 }
+void System_Manager::registerCourse(string studentid,string courseid) {
+    if (isStudentEligible(studentid,courseid)) {
+        students[studentid].registeredCourses.push_back(getCourse(courseid));
+        cout<<"registered successfully";
+    }else {
+        cout<<"You are not eligible for this course"<<endl;
+        std::deque<Course> leftCourses;
+        for (const Course &prereq: courses[courseid].getPrerequisites()) {
+            bool foundPrereq = false;
+
+            for (const auto &completed: students[studentid].getCompletedCourses()) {
+                if (completed.course.getCourseID() == prereq.getCourseID()) {
+                    foundPrereq = true;
+                    break;
+                }
+            }
+
+            if (!foundPrereq) {
+                leftCourses.push_back(prereq);
+            }
+        }
+
+        students[studentid].leftPrerequisites(leftCourses);
+    }
+}
+/*cout<<"students registered courses";
+for (Course course:student.getRegisteredCourses()) {
+    cout<<course.getCourseID()<<endl;
+}*/
 
 Student &System_Manager::getStudent(const std::string &id) {
     return students[id]; // Return by reference
@@ -133,9 +162,10 @@ bool System_Manager::isStudentEligible(const string &id, const string &courseCod
     }
 
     Student student = students[id];
-
-    for (const Course &course = courses[courseCode]; const Course &prereq: course.getPrerequisites()) {
-        if (string prereqID = prereq.getCourseID(); !student.FindCompletedCourse(prereqID)) {
+    Course course = courses[courseCode];
+    for (Course c : course.getPrerequisites()) {
+        string prereqID = c.getCourseID();
+          if (!student.FindCompletedCourse(prereqID)) {
             return false;
         }
     }
@@ -202,7 +232,7 @@ void System_Manager::showCompletedCourses(const string &studentId) {
 }
 
 void System_Manager::readAdminsFromFile() {
-    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\admins.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file." << endl;
         return;
@@ -231,7 +261,7 @@ void System_Manager::readAdminsFromFile() {
 }
 
 void System_Manager::writeAdminsToFile() {
-    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\admins.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\admins.csv");
     if (!file.is_open()) {
         cerr << "Error opening admins.csv file for writing." << endl;
         return;
@@ -248,13 +278,14 @@ void System_Manager::writeAdminsToFile() {
 }
 
 void System_Manager::readCoursesFromFile() {
-    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\courses.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for reading.\n";
         return;
     }
 
     std::string line;
+    unordered_map<string,string>prereqforlater;
     while (std::getline(file, line)) {
         std::stringstream ss(line);
         std::string id, title, syllabus, creditHourStr, instructorName, instructorEmail, prereqStr;
@@ -270,31 +301,37 @@ void System_Manager::readCoursesFromFile() {
         try {
             CourseDescription desc{title, syllabus, std::stoi(creditHourStr), {instructorName, instructorEmail}};
             Course course(id, desc);
-
-            if (!prereqStr.empty()) {
-                std::stringstream prereqStream(prereqStr);
-                std::string prereqID;
-                while (std::getline(prereqStream, prereqID, '-')) {
-                    if (courses.contains(prereqID)) {
-                        course.addPrerequisite(courses.at(prereqID), *this);
-                    } else {
-                        std::cout << "Warning: Prerequisite course ID '" << prereqID << "' not found.\n";
-                    }
-                }
-            }
-
             courses[id] = course;
+
+            prereqforlater[id] = prereqStr;
         } catch (std::exception &e) {
             std::cerr << "Error parsing course line: " << line << "\n";
             std::cerr << "Reason: " << e.what() << "\n";
         }
     }
 
-    file.close();
+    file.close();  //close it now we read all the file
+
+
+    //now lets assign all prerequisites to their courses
+    for (auto &[id, pre]: prereqforlater) {
+        if (pre.empty()) continue;
+        std::stringstream prereqStream(pre);
+        std::string prereqID;
+        while (std::getline(prereqStream, prereqID, '-')) {
+            if (courses.contains(prereqID)) {
+                courses[id].addPrerequisite(courses.at(prereqID), *this);
+            } else {
+                std::cout << "Warning: Prerequisite course ID '" << prereqID
+                          << "' not found for course '" << id << "'.\n";
+            }
+        }
+    }
+
 }
 
 void System_Manager::writeCoursesToFile() {
-    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\courses.csv");
+    std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\courses.csv");
 
     if (!file.is_open()) {
         std::cerr << "Failed to open courses file for writing.\n";
@@ -324,7 +361,7 @@ void System_Manager::writeCoursesToFile() {
 }
 
 void System_Manager::readStudentsFromFile() {
-    std::ifstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\students.csv");
+    std::ifstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for reading.\n";
         return;
@@ -394,7 +431,7 @@ void System_Manager::readStudentsFromFile() {
 }
 
 void System_Manager::writeStudentsToFile() {
-    std::ofstream file("G:\\C++Projects\\CourseRegSystem\\CourseRegisteration\\Data\\students.csv");
+      std::ofstream file("C:\\Users\\Dell\\CourseRegisteration\\Data\\students.csv");
     if (!file.is_open()) {
         std::cerr << "Failed to open students file for writing.\n";
         return;
@@ -411,7 +448,7 @@ void System_Manager::writeStudentsToFile() {
                 << snd.getPassword() << ",";
 
 
-        const auto &completedCourses = snd.getCompletedCourses();
+        std::vector<CompletedCourse> completedCourses = snd.getCompletedCourses();
         for (size_t i = 0; i < completedCourses.size(); ++i) {
             file << completedCourses[i].course.getCourseID() << ":" << completedCourses[i].semester << ':' << completedCourses[i].grade;
             if (i < completedCourses.size() - 1) {
@@ -421,7 +458,7 @@ void System_Manager::writeStudentsToFile() {
         file << ",";
 
 
-        const auto &registeredCourses = snd.getRegisteredCourses();
+        std::vector<Course>registeredCourses = snd.getRegisteredCourses();
         for (size_t i = 0; i < registeredCourses.size(); ++i) {
             file << registeredCourses[i].getCourseID();
             if (i < registeredCourses.size() - 1) {

@@ -8,11 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "G:/C++Projects/CourseRegSystem/CourseRegisteration/Admin.cpp" "CMakeFiles/Project.dir/Admin.cpp.obj" "gcc" "CMakeFiles/Project.dir/Admin.cpp.obj.d"
-  "G:/C++Projects/CourseRegSystem/CourseRegisteration/Course.cpp" "CMakeFiles/Project.dir/Course.cpp.obj" "gcc" "CMakeFiles/Project.dir/Course.cpp.obj.d"
-  "G:/C++Projects/CourseRegSystem/CourseRegisteration/Student.cpp" "CMakeFiles/Project.dir/Student.cpp.obj" "gcc" "CMakeFiles/Project.dir/Student.cpp.obj.d"
-  "G:/C++Projects/CourseRegSystem/CourseRegisteration/System_Manager.cpp" "CMakeFiles/Project.dir/System_Manager.cpp.obj" "gcc" "CMakeFiles/Project.dir/System_Manager.cpp.obj.d"
-  "G:/C++Projects/CourseRegSystem/CourseRegisteration/main.cpp" "CMakeFiles/Project.dir/main.cpp.obj" "gcc" "CMakeFiles/Project.dir/main.cpp.obj.d"
+  "C:/Users/Dell/CourseRegisteration/Admin.cpp" "CMakeFiles/Project.dir/Admin.cpp.obj" "gcc" "CMakeFiles/Project.dir/Admin.cpp.obj.d"
+  "C:/Users/Dell/CourseRegisteration/Course.cpp" "CMakeFiles/Project.dir/Course.cpp.obj" "gcc" "CMakeFiles/Project.dir/Course.cpp.obj.d"
+  "C:/Users/Dell/CourseRegisteration/Student.cpp" "CMakeFiles/Project.dir/Student.cpp.obj" "gcc" "CMakeFiles/Project.dir/Student.cpp.obj.d"
+  "C:/Users/Dell/CourseRegisteration/System_Manager.cpp" "CMakeFiles/Project.dir/System_Manager.cpp.obj" "gcc" "CMakeFiles/Project.dir/System_Manager.cpp.obj.d"
+  "C:/Users/Dell/CourseRegisteration/main.cpp" "CMakeFiles/Project.dir/main.cpp.obj" "gcc" "CMakeFiles/Project.dir/main.cpp.obj.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

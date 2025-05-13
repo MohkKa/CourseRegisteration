@@ -29,6 +29,8 @@ public:
 
     void showAvailableCourses() const;
 
+    void registerCourse(string studentid,string courseid);
+
     void showEligibleCourses(const string &id);
 
     bool isStudentEligible(const string &id, const string &courseCode);

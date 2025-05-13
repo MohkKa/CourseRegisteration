@@ -149,7 +149,7 @@ void Student::leftPrerequisites(std::deque<Course> leftCourses) {
         return;
     }
 
-    std::cout << "❌ You still need to complete the following prerequisites:\n";
+    std::cout << "You still need to complete the following prerequisites:\n";
     while (!leftCourses.empty()) {
         Course c = leftCourses.front();
         leftCourses.pop_front();

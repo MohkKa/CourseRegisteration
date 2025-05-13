@@ -1,3 +1,3 @@
-G:/C++Projects/CourseRegSystem/CourseRegisteration/cmake-build-debug/CMakeFiles/Project.dir
-G:/C++Projects/CourseRegSystem/CourseRegisteration/cmake-build-debug/CMakeFiles/edit_cache.dir
-G:/C++Projects/CourseRegSystem/CourseRegisteration/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Dell/CourseRegisteration/cmake-build-debug/CMakeFiles/Project.dir
+C:/Users/Dell/CourseRegisteration/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dell/CourseRegisteration/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -399,29 +399,16 @@ void studentMenu(System_Manager &manager, Student &student) {
             case 2:
                 manager.showEligibleCourses(student.getId());
                 break;
-            case 3: {
-                /*student.registerCourse();*/
 
-                string courseid;
-                while (true) {
-                    cout << "Enter course ID: ";
-                    getline(cin, courseid);
-
-                    if (!courseid.empty()) break;
-                    cout << "Course ID cannot be empty. Please try again.\n";
+                case 3: {
+                    /*student.registerCourse();*/
+                    string courseid;
+                    cout<<"enter course id";
+                    cin>>courseid;
+                    /*cout<<manager.courses[courseid].getPrerequisites().size()<<endl;*/
+                    manager.registerCourse(student.getId(), courseid);
+                    break;
                 }
-
-                if (manager.isStudentEligible(student.getId(), courseid)) {
-                    cout << "Registered successfully";
-                } else {
-                    cout << "You are not eligible for this course";
-                }
-
-                /*for (Course course:manager.courses[courseid].getPrerequisites()) {
-                    cout<<course.getCourseID()<<endl;
-                }*/
-                break;
-            }
             case 4: {
                 string courseID;
                 while (true) {
