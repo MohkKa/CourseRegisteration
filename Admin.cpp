@@ -634,6 +634,36 @@ void Admin::addPrereq(System_Manager &manager) {
     }
 
     int x;
+    string inputtt;
+
+    cout << "Enter number of prerequisite courses required: ";
+    while (true) {
+        try {
+            getline(cin, inputtt);
+
+            // Check if input is empty
+            if (inputtt.empty()) {
+                throw runtime_error("Input cannot be empty.");
+            }
+
+            // Try to convert input to integer
+            x = stoi(inputtt);
+
+            if (x < 0) {
+                throw runtime_error("Number cannot be negative.");
+            }
+
+            break;  // Valid input
+        } catch (const invalid_argument &) {
+            cout << "Error: Invalid input. Please enter a number. Try again: ";
+        } catch (const out_of_range &) {
+            cout << "Error: Number out of range. Try again: ";
+        } catch (const runtime_error &e) {
+            cout << "Error: " << e.what() << " Try again: ";
+        }
+    }
+
+    /*
     cout << "Enter number of prerequisite courses required: ";
     while (true) {
         try {
@@ -650,7 +680,7 @@ void Admin::addPrereq(System_Manager &manager) {
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << " Try again: ";
         }
-    }
+    } */
 
     for (int i = 0; i < x; ++i) {
         string id;
