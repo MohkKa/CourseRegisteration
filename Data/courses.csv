@@ -1,12 +1,12 @@
-MATH101,Pre-Calculus,algebra!! update 4,2,Alan Turing,turing@cis.edu,
-CS203,Database Systems,db,3,Amina Said,amina.said@cis.edu,CS101
-CS104,ETHICS,pre ethics,2,ahmed elawady,elawady@gmail.com,
-HUM123,operations research,operations research,3,amany elkady,amany@gmail.com,
-CS101,Introduction to CS,Basics of computing,3,John Doe,john@uni.edu,
-CS102,Data Structures,Advanced DS,3,Jane Smith,jane@uni.edu,
-TEST01,test,test,1,testt,testststst,
-CS201,Algorithms,Algorithm design,3,Mike Brown,mike@uni.edu,CS101
-CS301,Web Development,html & css,2,Tarek Elbaz,tarek.elbaz@cis.edu,CS203
-gg123,gg,gg,3,gg,gggmail.com,
-ML001,Machine Learning,Supervised,2,Andrew Ng,andrew@cis.edu,
 CS103,Object-Oriented Programming,programming paradigms,3,Barbara Ericson,ericson22@cis.edu,CS101
+ML001,Machine Learning,Supervised,2,Andrew Ng,andrew@cis.edu,
+gg123,gg,gg,3,gg,gggmail.com,
+CS301,Web Development,html & css,2,Tarek Elbaz,tarek.elbaz@cis.edu,CS203
+CS201,Algorithms,Algorithm design,3,Mike Brown,mike@uni.edu,CS101
+TEST01,test,test,1,testt,testststst,
+CS102,Data Structures,Advanced DS,3,Jane Smith,jane@uni.edu,
+CS101,Introduction to CS,Basics of computing,3,John Doe,john@uni.edu,
+HUM123,operations research,operations research,3,amany elkady,amany@gmail.com,
+CS104,ETHICS,pre ethics,2,ahmed elawady,elawady@gmail.com,
+CS203,Database Systems,db,3,Amina Said,amina.said@cis.edu,CS101
+MATH101,Pre-Calculus,algebra!! update 4,2,Alan Turing,turing@cis.edu,

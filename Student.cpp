@@ -279,3 +279,7 @@ bool Student::FindCompletedCourse(const std::string &id) const {
 
     return false;
 }
+
+std::vector<CompletedCourse>& Student::getCompletedCoursesRef() {
+    return completedCourses;
+}

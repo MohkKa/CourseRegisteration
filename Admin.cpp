@@ -892,7 +892,6 @@ void Admin::addgrade(System_Manager &manager) {
         break;
     }
 
-
     /*
     if (manager.students[stud_id].convertGradeToGPA(grade) == -3) {
         auto &courseToDrop = manager.students[stud_id].registeredCourses;
@@ -956,7 +955,7 @@ void Admin::updategrade(System_Manager &manager) {
     }
 
     Student &student = manager.getStudent(stud_id);
-    vector<CompletedCourse> courses = student.getCompletedCourses();
+    vector<CompletedCourse>& courses = student.getCompletedCoursesRef();
 
     if (courses.empty()) {
         cout << "No grades found for this student.\n";
