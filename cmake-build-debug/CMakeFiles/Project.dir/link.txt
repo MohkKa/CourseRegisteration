@@ -1,3 +1,3 @@
-"G:\CLion 2025.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\Project.dir/objects.a
-"G:\CLion 2025.1\bin\mingw\bin\ar.exe" qc CMakeFiles\Project.dir/objects.a @CMakeFiles\Project.dir\objects1.rsp
-"G:\CLion 2025.1\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\Project.dir/objects.a -Wl,--no-whole-archive -o Project.exe -Wl,--out-implib,libProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Project.dir\linkLibs.rsp
+"D:\Clion\CLion 2024.3.5\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\Project.dir/objects.a
+"D:\Clion\CLion 2024.3.5\bin\mingw\bin\ar.exe" qc CMakeFiles\Project.dir/objects.a @CMakeFiles\Project.dir\objects1.rsp
+"D:\Clion\CLion 2024.3.5\bin\mingw\bin\g++.exe" -g -Wl,--whole-archive CMakeFiles\Project.dir/objects.a -Wl,--no-whole-archive -o Project.exe -Wl,--out-implib,libProject.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Project.dir\linkLibs.rsp

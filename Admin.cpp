@@ -383,8 +383,7 @@ void Admin::updateCourse(System_Manager &manager) {
         }
         case 4: {
             int newCreditHour;
-
-            /* while (true) {
+            while (true) {
                 try {
                     cout << "Enter new credit hours: ";
                     if (!(cin >> newCreditHour)) {
@@ -400,31 +399,7 @@ void Admin::updateCourse(System_Manager &manager) {
                 } catch (const runtime_error &e) {
                     cout << "Error: " << e.what() << "\n";
                 }
-            } */
-
-            while (true) {
-                try {
-                    cout << "Enter new credit hours: ";
-                    string inputt;
-                    getline(cin, inputt);
-
-                    newCreditHour = stoi(inputt);
-
-                    if (newCreditHour <= 0) {
-                        throw runtime_error("Must be positive");
-                    }
-
-                    courseToUpdate.setCreditHour(newCreditHour);
-                    break;
-                } catch (const invalid_argument&) {
-                    cout << "Error: Invalid number\n";
-                } catch (const out_of_range&) {
-                    cout << "Error: Number is out of range\n";
-                } catch (const runtime_error& e) {
-                    cout << "Error: " << e.what() << "\n";
-                }
             }
-
             break;
         }
         case 5: {
@@ -634,36 +609,6 @@ void Admin::addPrereq(System_Manager &manager) {
     }
 
     int x;
-    string inputtt;
-
-    cout << "Enter number of prerequisite courses required: ";
-    while (true) {
-        try {
-            getline(cin, inputtt);
-
-            // Check if input is empty
-            if (inputtt.empty()) {
-                throw runtime_error("Input cannot be empty.");
-            }
-
-            // Try to convert input to integer
-            x = stoi(inputtt);
-
-            if (x < 0) {
-                throw runtime_error("Number cannot be negative.");
-            }
-
-            break;  // Valid input
-        } catch (const invalid_argument &) {
-            cout << "Error: Invalid input. Please enter a number. Try again: ";
-        } catch (const out_of_range &) {
-            cout << "Error: Number out of range. Try again: ";
-        } catch (const runtime_error &e) {
-            cout << "Error: " << e.what() << " Try again: ";
-        }
-    }
-
-    /*
     cout << "Enter number of prerequisite courses required: ";
     while (true) {
         try {
@@ -680,7 +625,7 @@ void Admin::addPrereq(System_Manager &manager) {
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << " Try again: ";
         }
-    } */
+    }
 
     for (int i = 0; i < x; ++i) {
         string id;
@@ -740,6 +685,13 @@ void Admin::addPrereq(System_Manager &manager) {
 
 void Admin::removePrereq(System_Manager &manager) {
     string courseID;
+    // cout << "Enter course id: ";
+    // cin >> courseID;
+    //
+    // while (!manager.courses.contains(courseID)) {
+    //     cout << "Course ID not found. Please try again: ";
+    //     cin >> courseID;
+    // }
 
     while (true) {
         cout << "Enter course ID: ";
@@ -784,15 +736,16 @@ void Admin::removePrereq(System_Manager &manager) {
         break;
     }
 
-    /* for (int i = 0; i < prereq_list.size(); i++) {
+    bool found = false;
+    for (int i = 0; i < prereq_list.size(); i++) {
         if (prereq_list[i].getTitle() == courseTitle) {
             prereq_list.erase(prereq_list.begin() + i);
             found = true;
             break;
         }
-    } */
+    }
 
-    /* if (!found) {
+    if (!found) {
         cout << "Course title not found in prerequisites.\n";
     } else {
         cout << "Updated prerequisites list: ";
@@ -800,37 +753,7 @@ void Admin::removePrereq(System_Manager &manager) {
             cout << c.getTitle() << ", ";
         }
         cout << endl;
-    } */
-
-    vector<Course> updated_list;
-    bool found = false;
-    for (const Course &c : prereq_list) {
-        if (c.getTitle() == courseTitle) {
-            found = true;
-            continue;
-        }
-        updated_list.push_back(c);
     }
-
-    if (!found) {
-        cout << "Course title not found in prerequisites.\n";
-        return;
-    }
-
-    Course temp = up_course;
-    temp.clearPrerequisites();
-    up_course = temp;
-
-    // re-adding filtered courses
-    for (const Course &c : updated_list) {
-        up_course.addPrerequisite(c, manager);
-    }
-
-    cout << "Updated prerequisites list: ";
-    for (const Course &c : up_course.getPrerequisites()) {
-        cout << c.getTitle() << ", ";
-    }
-    cout << endl;
 }
 
 void Admin::addgrade(System_Manager &manager) {
@@ -891,6 +814,7 @@ void Admin::addgrade(System_Manager &manager) {
 
         break;
     }
+
 
     /*
     if (manager.students[stud_id].convertGradeToGPA(grade) == -3) {
@@ -955,7 +879,7 @@ void Admin::updategrade(System_Manager &manager) {
     }
 
     Student &student = manager.getStudent(stud_id);
-    vector<CompletedCourse>& courses = student.getCompletedCoursesRef();
+    vector<CompletedCourse> courses = student.getCompletedCourses();
 
     if (courses.empty()) {
         cout << "No grades found for this student.\n";

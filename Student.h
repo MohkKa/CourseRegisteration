@@ -65,7 +65,6 @@ public:
     std::vector<Course> getRegisteredCourses() const { return registeredCourses; }
     std::vector<Course> getAvailableCourses() const { return availableCourses; }
     std::vector<CompletedCourse> getCompletedCourses() const { return completedCourses; }
-    std::vector<CompletedCourse>& getCompletedCoursesRef(); // for the updateGrades func.
     std::string getPassword() const { return password; }
     void setPassword(const std::string &newPassword) { password = newPassword; }
 
