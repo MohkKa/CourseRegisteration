@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Dell/CourseRegisteration/cmake-build-debug",
-		"source" : "C:/Users/Dell/CourseRegisteration"
+		"build" : "G:/C++Projects/CourseRegSystem/CourseRegisteration/cmake-build-debug",
+		"source" : "G:/C++Projects/CourseRegSystem/CourseRegisteration"
 	},
 	"version" : 
 	{
