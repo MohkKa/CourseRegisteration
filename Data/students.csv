@@ -1,8 +1,8 @@
 name,id,year,email,password,completedCourses,registeredCourses
-hana mazen,202345689,2,hana@gmail.com,12345,,HUM123
-youmna,s126,4,yo@gmail.com,123,,
-sama,S125,3,mo@email.com,123,,
-ahmed,S123,1,ahmed@email.com,123,,
-lolo,666,2,llo@gmail.com,123,ML001:fall2021:A,
-norhan,s222,2,norhan@cis.edu,11111,,
-karen,555,4,karen@gmail.com,12345,,CS101-HUM123-CS102
+hana mazen,202345689,2,hana@gmail.com,12345,,,0,
+youmna,s126,4,yo@gmail.com,123,,,0,
+sama,S125,3,mo@email.com,123,,,0,
+ahmed,S123,1,ahmed@email.com,123,,,0,
+lolo,666,2,llo@gmail.com,123,ML001:fall2021:A,,0,
+norhan,s222,2,norhan@cis.edu,11111,,,0,
+karen,555,4,karen@gmail.com,12345,,CS101-HUM123,0,

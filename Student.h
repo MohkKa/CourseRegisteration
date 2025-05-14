@@ -77,6 +77,12 @@ public:
     std::string getID() const {
         return this->id;
     }
+    int getwarnings() {
+        return this->warnings;
+    }
+    void setwarnings(int war) {
+        this->warnings = war;
+    }
 };
 
 #endif // STUDENT_H

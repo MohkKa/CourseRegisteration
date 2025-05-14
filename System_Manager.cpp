@@ -372,7 +372,7 @@ void System_Manager::readStudentsFromFile() {
 
     while (std::getline(file, line)) {
         std::stringstream ss(line);
-        std::string name, id, yearStr, email, password, completedCoursesStr, registeredCoursesStr;
+        std::string name, id, yearStr, email, password, completedCoursesStr, registeredCoursesStr,warningsstr;
 
         std::getline(ss, name, ',');
         std::getline(ss, id, ',');
@@ -381,6 +381,7 @@ void System_Manager::readStudentsFromFile() {
         std::getline(ss, password, ',');
         std::getline(ss, completedCoursesStr, ',');
         std::getline(ss, registeredCoursesStr, ',');
+        std::getline(ss, warningsstr, ',');
 
         Student student(name, id, yearStr, email, password);
 
@@ -423,7 +424,11 @@ void System_Manager::readStudentsFromFile() {
                 }
             }
         }
-
+        if (!warningsstr.empty()) {
+            student.setwarnings(std::stoi(warningsstr));
+        } else {
+            student.setwarnings(0); // or a default value
+        }
         students[id] = student;
     }
 
@@ -466,7 +471,8 @@ void System_Manager::writeStudentsToFile() {
             }
         }
 
-        file << "\n";
+        file << ",";
+        file << snd.getwarnings() << ","<< "\n";
     }
 
     file.close();
