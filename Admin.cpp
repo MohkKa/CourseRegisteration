@@ -9,6 +9,14 @@ Admin::Admin() {
     id = name = username = password = "";
 }
 
+CourseState::CourseState(const Course& course)
+    : courseID(course.getCourseID()),
+      title(course.getTitle()),
+      syllabus(course.getSyllabus()),
+      creditHour(course.getCreditHour()),
+      instructorName(course.getInstructorName()),
+      instructorEmail(course.getInstructorEmail()),
+      prerequisites(course.getPrerequisites()) {}
 Admin::Admin(const string &id, const string &name, const string &username, const string &password) {
     this->id = id;
     this->name = name;
@@ -47,37 +55,18 @@ bool Admin::UniqueID(const string &ID, const char type, const System_Manager &ma
 }
 
 void Admin::addCourse(System_Manager &manager) {
-    cout << "Please enter a detailed course description of the following :" << "\n";
-    cout << "1. Course id " << "\n" << "2. Title " << "\n" << "3. Syllabus" << "\n" << "4. Credit hours" << "\n" <<
-            "5. Instructor Name" << "\n" << "6. Instructor Email " << "\n";
+    cout << "Please Enter a Detailed course Description of the following :" << "\n";
+    cout << "1. Course id " << "\n" << "2. Title " << "\n" << "3.Syllabus" << "\n" << "4.Credit hours" << "\n" <<
+            "5.InstructorName" << "\n" << "6.Instructor Email " << "\n";
     string courseID, title, syllabus, instructorName, instructorEmail;
     int creditHour;
 
-    /*
     cout << "Enter unique course ID:";
     getline(cin, courseID);
 
     while (!UniqueID(courseID, 'C', manager)) {
         cout << "This ID is already taken. Please Try Again: ";
-        getline(cin, courseID);
-    }
-    */
-
-    while (true) {
-        try {
-            cout << "Enter unique course ID: ";
-            getline(cin, courseID);
-
-            if (courseID.empty())
-                throw runtime_error("Input cannot be empty");
-
-            if (!UniqueID(courseID, 'C', manager))
-                throw runtime_error("This ID is already taken");
-
-            break; // input is valid
-        } catch (const runtime_error& e) {
-            cout << "Error: " << e.what() << ". Please try again.\n";
-        }
+        cin >> courseID;
     }
 
     while (true) {
@@ -85,7 +74,7 @@ void Admin::addCourse(System_Manager &manager) {
             cout << "Enter course title:";
             getline(cin, title);
             if (title.empty()) {
-                throw runtime_error("Input cannot be empty");
+                /*throw runtime_error("Input cannot be empty");*/
             }
             break;
         } catch (const runtime_error &e) {
@@ -97,58 +86,36 @@ void Admin::addCourse(System_Manager &manager) {
         try {
             cout << "Enter syllabus:";
             getline(cin, syllabus);
-            if (syllabus.empty()) {
+            /*if (syllabus.empty()) {
                 throw runtime_error("Input cannot be empty");
-            }
+            }*/
             break;
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
         }
     }
 
-    /*
-    // while (true) {
-    //     try {
-    //         cout << "Enter credit hours: ";
-    //         if (!(cin >> creditHour)) {
-    //             cin.clear();
-    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //             throw runtime_error("Invalid input. Please enter a number.");
-    //         }
-    //         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //         break;
-    //     } catch (const runtime_error &e) {
-    //         cout << e.what() << " Enter credit hours: ";
-    //         cin.clear();
-    //         cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //     }
-    // } */
-
+    cout << "Enter credit hours:";
     while (true) {
         try {
-            cout << "Enter credit hours:";
-            string input;
-            getline(cin, input);
-            if (input.empty()) {
-                throw runtime_error("Input cannot be empty.");
+            if (!(cin >> creditHour)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Invalid input. Please enter a number.");
             }
-            creditHour = stoi(input);
-            if (creditHour <= 0) {
-                throw runtime_error("Credit hours must be a positive number.");
-            }
-
             break;
-        } catch (const exception &e) {
-            cout << "Error: " << e.what() << " Please try again.\n";
+        } catch (const runtime_error &e) {
+            cout << e.what() << " Enter credit hours: ";
         }
     }
-
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (true) {
         try {
-            cout <<"Enter instructor name:";
+            cout << "Enter instructor name:";
             getline(cin, instructorName);
             if (instructorName.empty()) {
-                throw runtime_error("Input cannot be empty");
+                /*throw runtime_error("Input cannot be empty");*/
             }
             break;
         } catch (const runtime_error &e) {
@@ -158,10 +125,10 @@ void Admin::addCourse(System_Manager &manager) {
 
     while (true) {
         try {
-            cout <<"Enter instructor mail:";
+            cout << "Enter instructor email: ";
             getline(cin, instructorEmail);
             if (instructorEmail.empty()) {
-                throw runtime_error("Input cannot be empty");
+                /*throw runtime_error("Input cannot be empty");*/
             }
             break;
         } catch (const runtime_error &e) {
@@ -174,43 +141,14 @@ void Admin::addCourse(System_Manager &manager) {
     Course newCourse(courseID, desc);
     manager.addCourse(courseID, newCourse);
 
-    /*
-    // string prereqID;
-    // cout << "Add prerequisites (course ID, 'done' to finish): ";
-    // while (true) {
-    //     try {
-    //         if (!(cin >> prereqID)) {
-    //             cin.clear();
-    //             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //             throw runtime_error("Invalid input");
-    //         }
-    //
-    //         if (prereqID == "done") break;
-    //
-    //         if (!manager.courses.contains(prereqID)) {
-    //             throw runtime_error("Course '" + prereqID + "' not found");
-    //         }
-    //
-    //         if (prereqID == courseID) {
-    //             throw runtime_error("Cannot add self as prerequisite");
-    //         }
-    //
-    //         newCourse.addPrerequisite(manager.courses[prereqID], manager);
-    //         cout << "Prerequisite added: " << prereqID << endl;
-    //         cout << "Add another prerequisite or 'done' to finish: ";
-    //     } catch (const runtime_error &e) {
-    //         cout << "Error: " << e.what() << ". Please try again.\n";
-    //         cout << "Add prerequisites (course ID, 'done' to finish): ";
-    //     }
-    // } */
-
     string prereqID;
-    cout << "Add prerequisites (course ID, 'done' to finish):";
+    cout << "Add prerequisites (course ID, 'done' to finish): ";
     while (true) {
         try {
-            getline(cin, prereqID);
-            if (prereqID.empty()) {
-                throw runtime_error("Input cannot be empty");
+            if (!(cin >> prereqID)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Invalid input");
             }
 
             if (prereqID == "done") break;
@@ -224,8 +162,8 @@ void Admin::addCourse(System_Manager &manager) {
             }
 
             newCourse.addPrerequisite(manager.courses[prereqID], manager);
-            cout << "Prerequisite added:" << prereqID << endl;
-            cout << "Add another prerequisite or 'done' to finish:";
+            cout << "Prerequisite added: " << prereqID << endl;
+            cout << "Add another prerequisite or 'done' to finish: ";
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
             cout << "Add prerequisites (course ID, 'done' to finish): ";
@@ -240,8 +178,6 @@ void Admin::addCourse(System_Manager &manager) {
 void Admin::updateCourse(System_Manager &manager) {
     // Get course ID with validation
     string courseID;
-
-    /*
     while (true) {
         try {
             cout << "Enter course ID to update: ";
@@ -257,55 +193,36 @@ void Admin::updateCourse(System_Manager &manager) {
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << ". Please try again.\n";
         }
-    } */
-
-    while (true) {
-        try {
-            cout << "Enter course ID to update: ";
-            getline(cin, courseID);
-            if (courseID.empty()) {
-                throw runtime_error("Input cannot be empty");
-            }
-            if (!manager.courses.contains(courseID)) {
-                throw runtime_error("Course not found");
-            }
-            break;
-        } catch (const runtime_error &e) {
-            cout << "Error: " << e.what() << ". Please try again.\n";
-        }
     }
 
     Course &courseToUpdate = manager.getCourse(courseID);
+    CourseState prevState(courseToUpdate);
+    courseHistory.push(prevState);
 
-    string input;
+    // Get menu choice with validation
     int choice;
-    courseToUpdate.Backupdata(courseToUpdate);
-
+    // courseToUpdate.Backupdata(courseToUpdate);
     while (true) {
-        cout << "What would you like to update:\n"
+        try {
+            cout << "What would you like to update:\n"
                     << "[1] courseID\n[2] title\n[3] syllabus\n"
                     << "[4] credit hour\n[5] instructor Name\n[6] instructor Email\n"
                     << "Enter choice: ";
-        getline(cin, input);
 
-        if (input.empty()) {
-            cout << "Choice cannot be empty. Try again.\n";
-            continue;
-        }
-
-        try {
-            choice = stoi(input);
-            if (choice < 1 || choice > 6)
-                throw runtime_error("Invalid range (1-6 only)");
+            if (!(cin >> choice) || choice < 1 || choice > 6) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Invalid choice (1-6 only)");
+            }
             break;
-        } catch (...) {
-            cout << "Invalid input. Enter a number between 1 and 6.\n";
+        } catch (const runtime_error &e) {
+            cout << "Error: " << e.what() << "\n";
         }
     }
+    cin.ignore(); // Clear newline
 
     switch (choice) {
         case 1: {
-            /*
             string newID;
             while (true) {
                 try {
@@ -314,26 +231,6 @@ void Admin::updateCourse(System_Manager &manager) {
                         cin.clear();
                         cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         throw runtime_error("Invalid input");
-                    }
-                    if (!UniqueID(newID, 'C', manager)) {
-                        throw runtime_error("ID already taken");
-                    }
-                    courseToUpdate.setCourseID(newID);
-                    cout << "Course ID updated successfully.\n";
-                    break;
-                } catch (const runtime_error &e) {
-                    cout << "Error: " << e.what() << "\n";
-                }
-            }
-            break; */
-
-            string newID;
-            while (true) {
-                try {
-                    cout << "Enter new course ID: ";
-                    getline(cin, newID);
-                    if (newID.empty()) {
-                        throw runtime_error("Input cannot be empty");
                     }
                     if (!UniqueID(newID, 'C', manager)) {
                         throw runtime_error("ID already taken");
@@ -439,8 +336,6 @@ void Admin::updateCourse(System_Manager &manager) {
     }
 
     cout << "Course updated successfully\n";
-    // cin.clear();
-    // cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
 }
 
 void Admin::removeCourse(System_Manager &manager) {
@@ -448,8 +343,6 @@ void Admin::removeCourse(System_Manager &manager) {
     cout << "Please Enter the course IDs you want to remove (type 'done' to finish):\n";
 
     string input;
-
-    /*
     while (true) {
         try {
             if (!(cin >> input)) {
@@ -469,34 +362,12 @@ void Admin::removeCourse(System_Manager &manager) {
             cout << "Error: " << e.what() << ". Please try again.\n";
             cout << "Enter course ID or 'done' to finish: ";
         }
-    } */
-
-    while (true) {
-        try {
-            string input;
-            cout << "Enter course ID or 'done' to finish: ";
-            getline(cin, input);
-
-            if (input.empty()) {
-                throw runtime_error("Input cannot be empty");
-            }
-
-            if (input == "done") break;
-
-            if (!manager.courses.contains(input)) {
-                throw runtime_error("Course not found: " + input);
-            }
-
-            courseIDs.push_back(input);
-        } catch (const runtime_error &e) {
-            cout << "Error: " << e.what() << ". Please try again.\n";
-        }
     }
 
     char confirm;
     for (const string &id: courseIDs) {
         while (true) {
-            /* try {
+            try {
                 cout << "Are you sure you want to delete course " << id << "? (y/n): ";
                 cin >> confirm;
 
@@ -510,34 +381,6 @@ void Admin::removeCourse(System_Manager &manager) {
                 } else {
                     cout << "Deletion cancelled.\n";
                 }
-                cin.ignore(std::numeric_limits<streamsize>::max(),'\n');
-                break;
-            } catch (const runtime_error &e) {
-                cout << "Error: " << e.what() << "\n";
-            } */
-
-            try {
-                cout << "Are you sure you want to delete course " << id << "? (y/n): ";
-                string line;
-                getline(cin, line);
-
-                if (line.empty()) {
-                    throw runtime_error("Input cannot be empty.");
-                }
-
-                confirm = line[0];  // take the first character as input
-
-                if (confirm != 'y' && confirm != 'Y' && confirm != 'n' && confirm != 'N') {
-                    throw runtime_error("Invalid choice. Please enter 'y' or 'n'.");
-                }
-
-                if (confirm == 'y' || confirm == 'Y') {
-                    manager.courses.erase(id);
-                    cout << "Course removed successfully.\n";
-                } else {
-                    cout << "Deletion cancelled.\n";
-                }
-
                 break;
             } catch (const runtime_error &e) {
                 cout << "Error: " << e.what() << "\n";
@@ -587,16 +430,11 @@ void Admin::displayCoursesByCreditHours(System_Manager &manager) {
 void Admin::addPrereq(System_Manager &manager) {
     string courseID;
     cout << "Enter course ID to add its prerequisites:\n";
-    getline(cin, courseID);
+    cin >> courseID;
 
-    // while (!manager.courses.contains(courseID)) {
-    //     cout << "Error: Course ID not found. Please enter a valid course ID: ";
-    //     cin >> courseID;
-    // }
-
-    while (courseID.empty() || !manager.courses.contains(courseID)) {
-        cout << "Error: Course ID not found or empty. Please enter a valid course ID: ";
-        getline(cin, courseID);
+    while (!manager.courses.contains(courseID)) {
+        cout << "Error: Course ID not found. Please enter a valid course ID: ";
+        cin >> courseID;
     }
 
     Course &up_course = manager.getCourse(courseID);
@@ -620,7 +458,6 @@ void Admin::addPrereq(System_Manager &manager) {
             if (x < 0) {
                 throw runtime_error("Number cannot be negative.");
             }
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');  // new cin.ignore()
             break;
         } catch (const runtime_error &e) {
             cout << "Error: " << e.what() << " Try again: ";
@@ -629,34 +466,10 @@ void Admin::addPrereq(System_Manager &manager) {
 
     for (int i = 0; i < x; ++i) {
         string id;
-        /*while (true) {
-            try {
-                cout << "Enter course no " << i + 1 << " ID: ";
-                cin >> id;
-
-                if (!manager.courses.contains(id)) {
-                    throw runtime_error("Course ID '" + id + "' not found.");
-                }
-
-                if (id == courseID) {
-                    throw runtime_error("A course cannot be a prerequisite of itself.");
-                }
-
-                up_course.addPrerequisite(manager.courses[id], manager);
-                break;
-            } catch (const runtime_error &e) {
-                cout << "Error: " << e.what() << " Please try again.\n";
-            }
-        } */
-
         while (true) {
             try {
                 cout << "Enter course no " << i + 1 << " ID: ";
-                getline(cin, id);
-
-                if (id.empty()) {
-                    throw runtime_error("Course ID cannot be empty.");
-                }
+                cin >> id;
 
                 if (!manager.courses.contains(id)) {
                     throw runtime_error("Course ID '" + id + "' not found.");
@@ -679,35 +492,16 @@ void Admin::addPrereq(System_Manager &manager) {
         cout << c.getTitle() << ", ";
     }
     cout << '\n';
-
-    // cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
 void Admin::removePrereq(System_Manager &manager) {
     string courseID;
-    // cout << "Enter course id: ";
-    // cin >> courseID;
-    //
-    // while (!manager.courses.contains(courseID)) {
-    //     cout << "Course ID not found. Please try again: ";
-    //     cin >> courseID;
-    // }
+    cout << "Enter course id: ";
+    cin >> courseID;
 
-    while (true) {
-        cout << "Enter course ID: ";
-        getline(cin, courseID);
-
-        if (courseID.empty()) {
-            cout << "Course ID cannot be empty. Please try again.\n";
-            continue;
-        }
-
-        if (!manager.courses.contains(courseID)) {
-            cout << "Course ID not found. Please try again.\n";
-            continue;
-        }
-
-        break;
+    while (!manager.courses.contains(courseID)) {
+        cout << "Course ID not found. Please try again: ";
+        cin >> courseID;
     }
 
     Course &up_course = manager.getCourse(courseID);
@@ -725,16 +519,9 @@ void Admin::removePrereq(System_Manager &manager) {
     cout << endl;
 
     string courseTitle;
-    while (true) {
-        cout << "Enter course title that you want to remove: ";
-        getline(cin, courseTitle);
-
-        if (courseTitle.empty()) {
-            cout << "Course title cannot be empty. Please try again.\n";
-            continue;
-        }
-        break;
-    }
+    cout << "Enter course title that you want to remove: ";
+    cin.ignore();
+    getline(cin, courseTitle);
 
     bool found = false;
     for (int i = 0; i < prereq_list.size(); i++) {
@@ -759,82 +546,38 @@ void Admin::removePrereq(System_Manager &manager) {
 void Admin::addgrade(System_Manager &manager) {
     string stud_id, course_id, grade, semester;
 
-    while (true) {
-        cout << "Enter student ID: ";
-        getline(cin, stud_id);
-
-        if (stud_id.empty() || !manager.students.contains(stud_id)) {
-            cout << "Invalid or empty student ID. Please try again.\n";
-            continue;
-        }
-        break;
+    cout << "Enter student ID: ";
+    cin >> stud_id;
+    while (!manager.students.contains(stud_id)) {
+        cout << "The student ID is incorrect. Please re-enter: ";
+        cin >> stud_id;
     }
 
-    while (true) {
-        cout << "Enter course ID: ";
-        getline(cin, course_id);
-
-        if (course_id.empty() || !manager.courses.contains(course_id)) {
-            cout << "Invalid or empty course ID. Please try again.\n";
-            continue;
-        }
-        break;
+    cout << "Enter course ID: ";
+    cin >> course_id;
+    while (!manager.courses.contains(course_id)) {
+        cout << "The course ID is incorrect. Please re-enter: ";
+        cin >> course_id;
     }
 
     auto &reg = manager.students[stud_id].registeredCourses;
 
     bool found = false;
-    int index = -1;
+    int index;
     for (int i = 0; i < reg.size(); i++) {
-        if (reg[i].getCourseID() == course_id) {
-            found = true;
-            index = i;
-            break;
-        }
+        if (reg[i].getCourseID() == course_id) found = true, index = i;
     }
-    if (index == -1) {
-        cout << "Course ID not found in registered courses.\n";
+
+    if (!found) {
+        cout << "Course ID not found";
         return;
     }
 
-    while (true) {
-        cout << "Enter course grade: ";
-        getline(cin, grade);
-        if (grade.empty()) {
-            cout << "Grade cannot be empty. Please try again.\n";
-            continue;
-        }
+    cout << "Enter course grade: ";
+    cin >> grade;
 
-        double gpa = manager.students[stud_id].convertGradeToGPA(grade);
-        if (gpa == -3) {
-            cout << "Invalid grade entered. The course has been dropped from registered courses.\n";
-            manager.students[stud_id].registeredCourses.erase(manager.students[stud_id].registeredCourses.begin() + index);
-            return;
-        }
-
-        break;
-    }
-
-
-    /*
-    if (manager.students[stud_id].convertGradeToGPA(grade) == -3) {
-        auto &courseToDrop = manager.students[stud_id].registeredCourses;
-        for (int i = 0; i < reg.size(); i++) {
-            if (reg[i].getCourseID() == course_id) courseToDrop.erase(courseToDrop.begin() + i);
-        }
-        cout << "Can't add course to completed cause of the grade and this course has been dropped ";
-    } */
-
-    while (true) {
-        cout << "Enter course semester: ";
-        getline(cin, semester);
-
-        if (semester.empty()) {
-            cout << "Semester cannot be empty. Try again.\n";
-            continue;
-        }
-        break;
-    }
+    cout << "Enter course semester: ";
+    cin >> semester;
 
     Student &student = manager.getStudent(stud_id);
     const Course &course = manager.getCourse(course_id);
@@ -861,21 +604,11 @@ void Admin::addgrade(System_Manager &manager) {
 void Admin::updategrade(System_Manager &manager) {
     string stud_id, course_id, new_grade;
 
-    while (true) {
-        cout << "Enter student ID: ";
-        getline(cin, stud_id);
-
-        if (stud_id.empty()) {
-            cout << "Student ID cannot be empty. Please try again.\n";
-            continue;
-        }
-
-        if (!manager.students.contains(stud_id)) {
-            cout << "Student ID not found. Please try again.\n";
-            continue;
-        }
-
-        break;
+    cout << "Enter student ID: ";
+    cin >> stud_id;
+    while (!manager.students.contains(stud_id)) {
+        cout << "Student ID not found. Please re-enter: ";
+        cin >> stud_id;
     }
 
     Student &student = manager.getStudent(stud_id);
@@ -892,21 +625,13 @@ void Admin::updategrade(System_Manager &manager) {
     }
 
     cout << "Enter course ID to update: ";
-    getline(cin, course_id);
-    while (course_id.empty()) {
-        cout << "Course ID cannot be empty. Please re-enter: ";
-        getline(cin, course_id);
-    }
+    cin >> course_id;
 
     bool found = false;
     for (CompletedCourse &c: courses) {
         if (c.course.getCourseID() == course_id) {
             cout << "Enter new grade: ";
-            getline(cin, new_grade);
-            while (new_grade.empty()) {
-                cout << "Grade cannot be empty. Please re-enter: ";
-                getline(cin, new_grade);
-            }
+            cin >> new_grade;
             c.grade = new_grade;
             found = true;
             break;
@@ -927,6 +652,8 @@ void Admin::updategrade(System_Manager &manager) {
 void Admin::addStudent(System_Manager &manager) {
     string name, id, year, email;
 
+    cin.ignore();
+
     while (true) {
         try {
             cout << "Enter student name: ";
@@ -939,30 +666,24 @@ void Admin::addStudent(System_Manager &manager) {
     }
 
     cout << "Enter student id: ";
-    getline(cin, id);
-    while (id.empty() || manager.students.contains(id)) {
-        if (id.empty()) {
-            cout << "Student ID cannot be empty. Please enter a valid ID: ";
-        } else {
-            cout << "This ID is already taken. Please enter a different ID: ";
-        }
-        getline(cin, id);
+    cin >> id;
+
+    while (manager.students.contains(id)) {
+        cout << "This ID is already taken. Please enter a different ID: ";
+        cin >> id;
     }
 
     cout << "Enter student year: ";
-    getline(cin, year);
-    while (year.empty()) {
-        cout << "Year cannot be empty. Please enter student year: ";
-        getline(cin, year);
-    }
+    cin >> year;
 
+    cout << "Enter student e-mail: ";
     while (true) {
-        cout << "Enter student e-mail: ";
-        getline(cin, email);
-        if (email.empty()) {
-            cout << "Email cannot be empty. Please try again.\n";
-        } else {
+        try {
+            cin >> email;
+            if (email.empty()) throw runtime_error("Input cannot be empty");
             break;
+        } catch (const runtime_error &e) {
+            cout << "Error: " << e.what() << ". Please try again: ";
         }
     }
 
@@ -1019,4 +740,46 @@ void Admin::addAdmin(System_Manager &manager) {
             << "Name: " << name << "\n"
             << "Email : " << email << "\n"
             << "Password: " << password;
+}
+void Admin::undoLastUpdate(System_Manager &manager) {
+    if (courseHistory.empty()) {
+        cout << "No recent updates to undo." << endl;
+        return;
+    }
+
+    CourseState prevState = courseHistory.top();
+    courseHistory.pop();
+
+    if (!manager.courses.contains(prevState.courseID)) {
+        cout << "Course '" << prevState.courseID << "' no longer exists." << endl;
+        return;
+    }
+
+    Course &course = manager.getCourse(prevState.courseID);
+
+    // Restore previous state
+    course.restoreFromState(prevState);
+
+    cout << "\n=== Undo Successful ===" << endl;
+    cout << "Course restored to previous state.\n"<<endl;
+
+    // Display updated course details
+    cout << "\n=== Updated Course Details ===" << endl;
+    cout << "Course ID: " << course.getCourseID() << endl;
+    cout << "Title: " << course.getTitle() << endl;
+    cout << "Syllabus: " << course.getSyllabus() << endl;
+    cout << "Credit Hours: " << course.getCreditHour() << endl;
+    cout << "Instructor Name: " << course.getInstructorName() << endl;
+    cout << "Instructor Email: " << course.getInstructorEmail() << endl;
+
+    // Display prerequisites (if any)
+    if (!course.getPrerequisites().empty()) {
+        cout << "\nPrerequisites: ";
+        for (const Course &prereq : course.getPrerequisites()) {
+            cout << prereq.getTitle() << " (" << prereq.getCourseID() << "), ";
+        }
+        cout << endl;
+    } else {
+        cout << "\nNo prerequisites." << endl;
+    }
 }

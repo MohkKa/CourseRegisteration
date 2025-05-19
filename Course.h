@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include "Admin.h"
 using namespace std;
 #include <string>
 #include <vector>
@@ -23,15 +24,15 @@ struct CourseDescription {
     Instructor instructor;
 };
 
-struct CourseState {
-    string ID;
-    CourseDescription description;
-};
+// struct CourseState {
+//     string ID;
+//     CourseDescription description;
+// };
 
 class Course {
     std::string courseID;
     CourseDescription courseDescription;
-    std::vector<Course> prerequisites;
+    vector<Course> prerequisites;
     stack<CourseState> history;
 
 public:
@@ -76,13 +77,12 @@ public:
     void addPrerequisite(const Course &course, const System_Manager &manager);
 
     void clearPrerequisites();
-    void Backupdata(Course);
+    void restoreFromState(const CourseState& state);
 
     void showCourseDescription() const;
 
     void showPrerequisites() const;
-    Course undoupdate(Course);
-    void displayAfterUndo(Course) const;
+
     void addCourse(Course course);
 };
 

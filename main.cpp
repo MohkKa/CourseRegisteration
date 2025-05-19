@@ -134,11 +134,12 @@ void adminMenu(System_Manager &manager, Admin &admin) {
         cout << "4. Undo Last Added Course" << endl;
         cout << "5. Display Courses by Credit Hours" << endl;
         cout << "6. Add Student" << endl;
-        cout << "7. Add/Update Grades" << endl;
-        cout << "8. Manage Prerequisites" << endl;
-        cout << "9. Change Password" << endl;
-        cout<< "10.undo update"<<endl;
-        cout << "11. Logout" << endl;
+        cout << "7. Add Admin" << endl;
+        cout << "8. Add/Update Grades" << endl;
+        cout << "9. Manage Prerequisites" << endl;
+        cout << "10. Change Password" << endl;
+        cout<< "11.undo update"<<endl;
+        cout << "12. Logout" << endl;
 
 
         int choice = 0;
@@ -198,6 +199,10 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 admin.addStudent(manager);
                 break;
             case 7: {
+                admin.addAdmin(manager);
+                break;
+            }
+            case 8: {
                 int gradeChoice;
                 string input;
 
@@ -227,7 +232,7 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 }
                 break;
             }
-            case 8: {
+            case 9: {
                 int prereqChoice;
                 string input;
 
@@ -271,7 +276,7 @@ void adminMenu(System_Manager &manager, Admin &admin) {
 
                 break;
             }
-            case 9: {
+            case 10: {
 
                 string newPass, confirmPass;
 
@@ -299,30 +304,22 @@ void adminMenu(System_Manager &manager, Admin &admin) {
                 }
                 break;
             }
-            case 10:{
-                string id;
-                while (true) {
-                    cout << "Enter course ID: ";
-                    getline(cin, id);
+            case 11:{
+                cout << "Are you sure you want to undo the last update? (y/n): ";
+                char confirm;
+                cin >> confirm;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-                    if (id.empty()) {
-                        cout << "Course ID cannot be empty. Please try again.\n";
-                        continue;
-                    }
-
-                    if (manager.courses.find(id) != manager.courses.end()) {
-                        Course course = manager.getCourse(id);
-                        Course pre_update = course.undoupdate(course);
-                        course.displayAfterUndo(pre_update);
-                        break;
-                    } else {
-                        cout << "Course not found! Please try again.\n";
-                    }
+                if (tolower(confirm) != 'y') {
+                    cout << "Undo cancelled." << endl;
+                    break;
                 }
+
+                admin.undoLastUpdate(manager);
 
                 break;
             }
-            case 11:
+            case 12:
                 return;
             default:
                 cout << "Invalid choice!" << endl;

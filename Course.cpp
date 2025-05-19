@@ -109,32 +109,32 @@ void Course::showCourseDescription() const {
             << std::setw(LABEL_WIDTH) << "Syllabus:"
             << std::setw(VALUE_WIDTH) << courseDescription.syllabus << "\n\n";
 }
-void Course::Backupdata(Course course) {
-    CourseState state = {course.getCourseID(), course.getDescription()};
-    course.history.push(state);
-}
-Course Course::undoupdate(Course course) {
+// void Course::Backupdata(Course &course) {
+//     CourseState state = {course.getCourseID(), course.getDescription()};
+//     course.history.push(state);
+// }
+// Course Course::undoupdate(Course& course) {
 
-    if (!course.history.empty()) {
-        CourseState prevState = course.history.top();
-        course. history.pop();
-        course.courseID = prevState.ID;
-        course. courseDescription = prevState.description;
-        cout << "Undo successful.\n";
-    } else {
-        cout << "No previous states to undo.\n";
-    }
-    return course;
-}
+//     if (!course.history.empty()) {
+//         CourseState prevState = course.history.top();
+//         course. history.pop();
+//         course.courseID = prevState.ID;
+//         course. courseDescription = prevState.description;
+//         cout << "Undo successful.\n";
+//     } else {
+//         cout << "No previous states to undo.\n";
+//     }
+//     return course;
+// }
 
-void Course::displayAfterUndo(Course course) const {
-    cout << "\n--- Course Info After Undo ---\n";
-    cout<<course.getCourseID()<<endl;
-    cout<<course.getDescription().title<<endl;
-    cout<<course.getDescription().creditHour<<endl;
-    cout<<course.getDescription().syllabus<<endl;
-    cout << "------------------------------\n";
-}
+// void Course::displayAfterUndo(Course &course) const {
+//     cout << "\n--- Course Info After Undo ---\n";
+//     cout<<course.getCourseID()<<endl;
+//     cout<<course.getDescription().title<<endl;
+//     cout<<course.getDescription().creditHour<<endl;
+//     cout<<course.getDescription().syllabus<<endl;
+//     cout << "------------------------------\n";
+// }
 
 void Course::showPrerequisites() const {
     if (prerequisites.empty()) {
@@ -147,4 +147,14 @@ void Course::showPrerequisites() const {
         std::cout << " - " << prereq.getCourseID() << ": " << prereq.getTitle() << "\n";
     }
     std::cout << "\n";
+}
+void Course :: restoreFromState(const CourseState& state) {
+    courseID = state.courseID;
+    courseDescription.title=state.title;
+    courseDescription.syllabus=state.syllabus;
+    courseDescription.creditHour=state.creditHour;
+    courseDescription.instructor.name=state.instructorName;
+    courseDescription.instructor.email=state.instructorEmail;
+    prerequisites=state.prerequisites;
+
 }
